@@ -1,4 +1,24 @@
 <p id="notice"><%= notice %></p>
 
-<%= link_to 'Edit', edit_admin_event_path(@admin_event) %> |
+<p>
+  <strong>Name:</strong>
+  <%= @event.name %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @event.date %>
+</p>
+
+<p>
+  <strong>Location:</strong>
+  <%= @event.location %>
+</p>
+
+<p>
+  <strong>Details:</strong>
+  <%= @event.details %>
+</p>
+
+<%= link_to 'Edit', edit_admin_event_path(@event) %> |
 <%= link_to 'Back', admin_events_path %>

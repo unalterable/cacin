@@ -1,16 +1,16 @@
-<%= form_for([:admin, admin_event]) do |f| %>
-  <% if admin_event.errors.any? %>
+<%= form_for([:admin, @event]) do |f| %>
+  <% if event.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(admin_event.errors.count, "error") %> prohibited this admin_event from being saved:</h2>
+      <h2><%= pluralize(event.errors.count, "error") %> prohibited this event from being saved:</h2>
 
       <ul>
-      <% admin_event.errors.full_messages.each do |message| %>
+      <% event.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
     </div>
   <% end %>
-  
+
   <div class="field">
     <%= f.label :name %>
     <%= f.text_field :name %>

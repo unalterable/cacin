@@ -1,10 +1,10 @@
 class Admin::EventsController < ApplicationController
-  before_action :set_admin_event, only: [:show, :edit, :update, :destroy]
+  before_action :set_event, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/events
   # GET /admin/events.json
   def index
-    @admin_events = Event.all
+    @events = Event.all
   end
 
   # GET /admin/events/1
@@ -14,7 +14,7 @@ class Admin::EventsController < ApplicationController
 
   # GET /admin/events/new
   def new
-    @admin_event = Event.new
+    @event = Event.new
   end
 
   # GET /admin/events/1/edit
@@ -22,49 +22,38 @@ class Admin::EventsController < ApplicationController
   end
 
   # POST /admin/events
-  # POST /admin/events.json
   def create
-    @admin_event = Event.new(admin_event_params)
-
-      if @admin_event.save
-        redirect_to admin_event_path(@admin_event), notice: 'Event was successfully created.'
+    @event = Event.new(event_params)
+      if @event.save
+        redirect_to admin_event_path(@event), notice: 'Event was successfully created.'
       else
         render :new
       end
   end
 
   # PATCH/PUT /admin/events/1
-  # PATCH/PUT /admin/events/1.json
   def update
-    respond_to do |format|
-      if @admin_event.update(admin_event_params)
-        format.html { redirect_to @admin_event, notice: 'Event was successfully updated.' }
-        format.json { render :show, status: :ok, location: @admin_event }
+      if @event.update(event_params)
+        redirect_to admin_event_path(@event), notice: 'Event was successfully updated.'
       else
-        format.html { render :edit }
-        format.json { render json: @admin_event.errors, status: :unprocessable_entity }
+        render :edit
       end
-    end
   end
 
   # DELETE /admin/events/1
-  # DELETE /admin/events/1.json
   def destroy
-    @admin_event.destroy
-    respond_to do |format|
-      format.html { redirect_to admin_events_url, notice: 'Event was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    @event.destroy
+    redirect_to admin_events_url, notice: 'Event was successfully destroyed.' 
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_admin_event
-      @admin_event = Event.find(params[:id])
+    def set_event
+      @event = Event.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def admin_event_params
-      params.fetch(:admin_event, {})
+    def event_params
+      params.require(:event).permit(:name, :date, :location, :details)
     end
 end

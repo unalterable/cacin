@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  
+
   get '/events', to: 'events#index'
-  get '/events/:id', to: 'events#show'
+  get '/events/:id', to: 'events#show', as: 'event'
   
   namespace :admin do
     resources :events
