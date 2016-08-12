@@ -1,5 +1,6 @@
 class Admin::EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /admin/events
   # GET /admin/events.json
@@ -43,7 +44,7 @@ class Admin::EventsController < ApplicationController
   # DELETE /admin/events/1
   def destroy
     @event.destroy
-    redirect_to admin_events_url, notice: 'Event was successfully destroyed.' 
+    redirect_to admin_events_url, notice: 'Event was successfully destroyed.'
   end
 
   private
