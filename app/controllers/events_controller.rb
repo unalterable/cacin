@@ -12,6 +12,9 @@ class EventsController < ApplicationController
   def show
   end
 
+  def about_us
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_event

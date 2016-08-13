@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   devise_for :users
   root to: "events#index"
 
-  get '/events', to: 'events#index'
+
+  get '/about_us', to: 'events#about_us'
+
   get '/events/:id', to: 'events#show', as: 'event'
 
   namespace :admin do
