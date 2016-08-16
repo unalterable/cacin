@@ -8,6 +8,14 @@ class Admin::MembersController < ApplicationController
     @members = Member.all
   end
 
+  def import
+    Member.import_csv(params[:file])
+    redirect_to admin_members_path, notice: "Products imported."
+  end
+
+  def export
+    send_data Member.to_csv, filename: "users-#{Date.today}.csv"
+  end
   # GET /members/1
   # GET /members/1.json
   def show
