@@ -22,7 +22,7 @@
         <td><%= invitation.plain_text %></td>
         <td><%= link_to 'Show', admin_invitation_path(invitation) %></td>
         <td><%= link_to 'Edit', edit_admin_invitation_path(invitation) %></td>
-        <td><%= link_to 'Destroy', admin_event_path(invitation), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Destroy', admin_invitation_path(invitation), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

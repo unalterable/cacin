@@ -19,6 +19,11 @@
   <strong>Details:</strong>
   <%= @event.details %>
 </p>
-
+<p>
+  <strong>Invitations</strong>
+  <% @event.invitations.each do |invitation| %>
+    <li><%= link_to invitation.name, admin_invitation_path(invitation) %></li>
+  <% end %>
+</p>
 <%= link_to 'Edit', edit_admin_event_path(@event) %> |
 <%= link_to 'Back', admin_events_path %>
