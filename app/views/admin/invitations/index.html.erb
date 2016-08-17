@@ -5,6 +5,10 @@
 <table>
   <thead>
     <tr>
+      <th>Name</th>
+      <th>Notes</th>
+      <th>HTML</th>
+      <th>plain_text</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -12,9 +16,13 @@
   <tbody>
     <% @invitations.each do |invitation| %>
       <tr>
-        <td><%= link_to 'Show', invitation %></td>
-        <td><%= link_to 'Edit', edit_invitation_path(invitation) %></td>
-        <td><%= link_to 'Destroy', invitation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= invitation.name %></td>
+        <td><%= invitation.notes %></td>
+        <td><%= invitation.html %></td>
+        <td><%= invitation.plain_text %></td>
+        <td><%= link_to 'Show', admin_invitation_path(invitation) %></td>
+        <td><%= link_to 'Edit', edit_admin_invitation_path(invitation) %></td>
+        <td><%= link_to 'Destroy', admin_event_path(invitation), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -22,4 +30,4 @@
 
 <br>
 
-<%= link_to 'New Invitation', new_invitation_path %>
+<%= link_to 'New Invitation', new_admin_invitation_path %>

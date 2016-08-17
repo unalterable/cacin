@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     post '/members/import', to: 'members#import'
     resources :events
     resources :members
+    resources :invitations
   end
 
 end

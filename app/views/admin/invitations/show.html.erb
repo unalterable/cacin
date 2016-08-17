@@ -1,4 +1,24 @@
 <p id="notice"><%= notice %></p>
 
-<%= link_to 'Edit', edit_invitation_path(@invitation) %> |
-<%= link_to 'Back', invitations_path %>
+<p>
+  <strong>Name:</strong>
+  <%= @invitation.name %>
+</p>
+<p>
+  <strong>Notes:</strong>
+  <%= @invitation.notes %>
+</p>
+<p>
+  <strong>HTML:</strong>
+  <%= @invitation.html %>
+</p>
+<p>
+  <strong>Plain Text:</strong>
+  <%= @invitation.plain_text %>
+</p>
+<p>
+  <strong>Event:</strong>
+  <%= @invitation.event.name %>
+</p>
+<%= link_to 'Edit', edit_admin_invitation_path(@invitation) %> |
+<%= link_to 'Back', admin_invitations_path %>

@@ -3,13 +3,11 @@ class Admin::EventsController < ApplicationController
   before_action :authenticate_user!
 
   # GET /admin/events
-  # GET /admin/events.json
   def index
     @events = Event.all
   end
 
   # GET /admin/events/1
-  # GET /admin/events/1.json
   def show
   end
 
@@ -25,20 +23,20 @@ class Admin::EventsController < ApplicationController
   # POST /admin/events
   def create
     @event = Event.new(event_params)
-      if @event.save
-        redirect_to admin_event_path(@event), notice: 'Event was successfully created.'
-      else
-        render :new
-      end
+    if @event.save
+      redirect_to admin_event_path(@event), notice: 'Event was successfully created.'
+    else
+      render :new
+    end
   end
 
   # PATCH/PUT /admin/events/1
   def update
-      if @event.update(event_params)
-        redirect_to admin_event_path(@event), notice: 'Event was successfully updated.'
-      else
-        render :edit
-      end
+    if @event.update(event_params)
+      redirect_to admin_event_path(@event), notice: 'Event was successfully updated.'
+    else
+      render :edit
+    end
   end
 
   # DELETE /admin/events/1
