@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   root to: "home#index"
   get '/about_us', to: 'home#about_us'
-
+  
   namespace :admin do
     root to: "events#index"
     get '/members/export', to: 'members#export'

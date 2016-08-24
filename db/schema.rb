@@ -55,14 +55,6 @@ ActiveRecord::Schema.define(version: 20160824162110) do
     t.string   "priority"
   end
 
-  create_table "user_tokens", force: :cascade do |t|
-    t.string   "token"
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_user_tokens_on_user_id", using: :btree
-  end
-
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -82,5 +74,4 @@ ActiveRecord::Schema.define(version: 20160824162110) do
 
   add_foreign_key "invitations", "events"
   add_foreign_key "member_tokens", "members"
-  add_foreign_key "user_tokens", "users"
 end
