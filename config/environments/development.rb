@@ -69,6 +69,4 @@ Rails.application.configure do
 
   ActionMailer::Base.default content_type: "text/html"
 
-  config.active_job.queue_adapter = :sidekiq
-
 end
