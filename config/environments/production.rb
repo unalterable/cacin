@@ -83,4 +83,18 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+  
+  config.action_mailer.delivery_method = :smtp
+
+  config.action_mailer.smtp_settings = {
+     address:              Figaro.env.cacin_smtp_address,
+     port:                 587,
+#     domain:               works as any string unless '' or nil, but if not sent it's ok,
+     user_name:            Figaro.env.cacin_email,
+     password:             Figaro.env.cacin_password,
+     authentication:       'plain',
+     enable_starttls_auto: true
+  }
+
+  ActionMailer::Base.default content_type: "text/html"
 end
