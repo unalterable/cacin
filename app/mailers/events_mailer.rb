@@ -19,10 +19,10 @@ class EventsMailer < ApplicationMailer
 
     def pause
       puts "=============="
-      print "Pausing before email: "
+      puts "Pausing before email: "
       5.times do |x|
+        puts 5 - x
         sleep(1)
-        print "#{ 5 - x }... "
       end
       puts "=============="
     end
