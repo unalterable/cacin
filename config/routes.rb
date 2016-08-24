@@ -2,9 +2,8 @@ Rails.application.routes.draw do
 
   devise_for :users, path_names: { sign_up: '' }
 
-  root to: "events#index"
-  get '/about_us', to: 'events#about_us'
-  get '/events/:id', to: 'events#show', as: 'event'
+  root to: "home#index"
+  get '/about_us', to: 'home#about_us'
 
   namespace :admin do
     root to: "events#index"
