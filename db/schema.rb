@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160825124500) do
+ActiveRecord::Schema.define(version: 20160825193538) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,16 @@ ActiveRecord::Schema.define(version: 20160825124500) do
     t.string   "priority"
   end
 
+  create_table "rsvps", force: :cascade do |t|
+    t.integer  "event_id"
+    t.integer  "member_id"
+    t.string   "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_rsvps_on_event_id", using: :btree
+    t.index ["member_id"], name: "index_rsvps_on_member_id", using: :btree
+  end
+
   create_table "user_tokens", force: :cascade do |t|
     t.string   "token"
     t.integer  "user_id"
@@ -85,5 +95,7 @@ ActiveRecord::Schema.define(version: 20160825124500) do
   add_foreign_key "invitations", "events"
   add_foreign_key "member_tokens", "events"
   add_foreign_key "member_tokens", "members"
+  add_foreign_key "rsvps", "events"
+  add_foreign_key "rsvps", "members"
   add_foreign_key "user_tokens", "users"
 end

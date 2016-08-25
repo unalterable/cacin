@@ -14,6 +14,16 @@
     </div>
   <% end %>
 
+  <% if event %>
+    <div class='field'>
+      <%= label :rsvp, event.name %> 
+      <%= select_tag(:rsvp, options_for_select([
+      ['Attending', 'attending'],
+      ['Not Attending', 'not_attending']
+      ], 1)) %>
+    </div>
+  <% end %>
+
   <div class="field">
     <%= f.label :title %>
     <%= f.text_field :title %>

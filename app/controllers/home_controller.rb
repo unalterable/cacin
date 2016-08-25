@@ -22,6 +22,8 @@ class HomeController < ApplicationController
   end
 
   def rsvp_update
+    p '======================'
+    p params
     @member = Member.find(params[:id])
     if @member.update(member_params)
       redirect_to rsvp_path(token: params[:token]), notice: 'Member was successfully updated.'
@@ -44,6 +46,7 @@ class HomeController < ApplicationController
       if params[:token] && token_record = MemberToken.find_by(token: params[:token])
         @token = token_record.token
         @member = token_record.member
+        @event = token_record.event
       else
         redirect_to '/sign_up'
       end
