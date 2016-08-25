@@ -9,6 +9,10 @@ class HomeController < ApplicationController
     @member = Member.new
   end
 
+  def request_token_email
+    redirect_to root_path, notice: "Email has been sent to #{params[:email]}"
+  end
+
   def new_member
     @member = Member.new(member_params)
     if @member.save
@@ -22,10 +26,9 @@ class HomeController < ApplicationController
   end
 
   def rsvp_update
-    p '======================'
-    p params
-    @member = Member.find(params[:id])
+    @rsvp.status = params[:rsvp]
     if @member.update(member_params)
+      @rsvp.save
       redirect_to rsvp_path(token: params[:token]), notice: 'Member was successfully updated.'
     else
       render :edit
@@ -47,6 +50,7 @@ class HomeController < ApplicationController
         @token = token_record.token
         @member = token_record.member
         @event = token_record.event
+        @rsvp = Rsvp.find_or_initialize_by( member: @member, event: @event)
       else
         redirect_to '/sign_up'
       end

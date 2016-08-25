@@ -1,26 +1,35 @@
+<% if member.errors.any? %>
+<div id="error_explanation">
+  <ul>
+    <% member.errors.full_messages.each do |message| %>
+    <li>
+      <% if message == 'Email has already been taken' %>
+      <%= "#{ member.email } is already taken by a member in our database. If this is you we can email you a link so you can alter your details: " %>
+      <%= form_tag(request_token_email_path, method: "post") do %>
+      <%= hidden_field_tag(:email, member.email) %>
+      <%= submit_tag("Request Email") %>
+      <% end %>
+      <% else %>
+      <%= message %>
+      <% end %>
+    </li>
+    <% end %>
+</ul>
+</div>
+<% end %>
+
 <%= form_for([:rsvp, member]) do |f| %>
 
   <%= hidden_field_tag(:token, token) if token %>
 
-  <% if member.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(member.errors.count, "error") %> prohibited this member from being saved:</h2>
-
-      <ul>
-      <% member.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
 
   <% if event %>
     <div class='field'>
-      <%= label :rsvp, event.name %> 
+      <%= label :rsvp, event.name %>
       <%= select_tag(:rsvp, options_for_select([
       ['Attending', 'attending'],
       ['Not Attending', 'not_attending']
-      ], 1)) %>
+      ], rsvp.status || 'attending')) %>
     </div>
   <% end %>
 
