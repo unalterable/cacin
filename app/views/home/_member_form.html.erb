@@ -1,6 +1,6 @@
-<%= form_for(member, url: rsvp_update_path(member)) do |f| %>
+<%= form_for([:rsvp, member]) do |f| %>
 
-  <%= hidden_field_tag :token, token %>
+  <%= hidden_field_tag(:token, token) if token %>
 
   <% if member.errors.any? %>
     <div id="error_explanation">

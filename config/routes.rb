@@ -5,8 +5,12 @@ Rails.application.routes.draw do
   root to: "home#index"
   get '/about_us', to: 'home#about_us'
 
+  get '/sign_up', to: 'home#sign_up'
+
   get '/rsvp', to: 'home#rsvp'
-  patch '/rsvp_update/:id', to: 'home#rsvp_update', as: 'rsvp_update'
+  post '/rsvp_update', to: 'home#new_member', as: 'rsvp_members'
+  patch '/rsvp_update.:id', to: 'home#rsvp_update', as: 'rsvp_member'
+
 
   namespace :admin do
     root to: "events#index"

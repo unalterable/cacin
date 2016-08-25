@@ -1,11 +1,11 @@
 class MemberToken < ApplicationRecord
   belongs_to :member
-  validates :member, presence: true
+  belongs_to :event
 
-  before_create do
-    self.token = gen_token
-    p self.token
-  end
+  validates :member, presence: true
+  validates :event, presence: true
+
+  before_create { self.token = gen_token }
 
   def gen_token
     require 'securerandom'

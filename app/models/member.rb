@@ -1,4 +1,6 @@
 class Member < ApplicationRecord
+  validates :email, uniqueness: true
+
   require 'csv'
 
   def self.import_csv(file)

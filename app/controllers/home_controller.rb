@@ -4,6 +4,19 @@ class HomeController < ApplicationController
     @events = Event.where("date >= :now", {now: Date.today})
   end
 
+  def sign_up
+    @member = Member.new
+  end
+
+  def new_member
+    @member = Member.new(member_params)
+    if @member.save
+      redirect_to root_path, notice: 'Member was successfully created.'
+    else
+      render :sign_up
+    end
+  end
+
   def rsvp
     if params[:token] && token_record = MemberToken.find_by(token: params[:token])
       @token = token_record.token
@@ -20,11 +33,8 @@ class HomeController < ApplicationController
     else
       render :edit
     end
-
   end
 
-  def show
-  end
 
   def about_us
   end
