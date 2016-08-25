@@ -5,24 +5,14 @@ class HomeController < ApplicationController
     @events = Event.where("date >= :now", {now: Date.today})
   end
 
-  def sign_up
-    @member = Member.new
-  end
-
-  def request_token_email
-    redirect_to root_path, notice: "Email has been sent to #{params[:email]}"
-  end
-
-  def new_member
-    @member = Member.new(member_params)
-    if @member.save
-      redirect_to root_path, notice: 'Member was successfully created.'
-    else
-      render :sign_up
-    end
+  def about_us
   end
 
   def rsvp
+  end
+
+  def sign_up
+    @member = Member.new
   end
 
   def rsvp_update
@@ -35,9 +25,26 @@ class HomeController < ApplicationController
     end
   end
 
-
-  def about_us
+  def new_member
+    @member = Member.new(member_params)
+    if @member.save
+      redirect_to root_path, notice: 'Member was successfully created.'
+    else
+      render :sign_up
+    end
   end
+
+  def request_token_email
+    member = Member.find_by(email: params[:email])
+    token = MemberToken.new(member: member)
+    if token.save
+      MemberMailer.token_link(token).deliver_later
+      redirect_to root_path, notice: "Email has been sent to #{ params[:email] }"
+    else
+      redirect_to root_path, notice: "There has been an error. The email did not send. Please contact the system administrator."
+    end
+  end
+
 
   private
 
