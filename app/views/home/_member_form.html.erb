@@ -2,9 +2,10 @@
   <div id="error_explanation" class='alert alert-danger'>
     <% member.errors.full_messages.each do |message| %>
       <% if message == 'Email has already been taken' %>
-        <%= "#{ member.email } is already taken by a member in our database. If this is you we can email you a link so you can alter your details: " %>
         <%= form_tag(request_token_email_path, method: "post") do %>
         <%= hidden_field_tag(:email, member.email) %>
+        <%= member.email %>
+         is already taken by a member in our database. If this is you we can email you a link so you can alter your details:   
         <%= submit_tag("Request Email") %>
       <% end %>
       <% else %>
