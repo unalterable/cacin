@@ -49,6 +49,9 @@ class Admin::MembersController < ApplicationController
   # PATCH/PUT /members/1
   # PATCH/PUT /members/1.json
   def update
+    p '======================================2'
+    p params
+    p params[:id]
     respond_to do |format|
       if @member.update(member_params)
         format.html { redirect_to admin_member_path(@member), notice: 'Member was successfully updated.' }
@@ -76,7 +79,6 @@ class Admin::MembersController < ApplicationController
       @member = Member.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def member_params
       params.require(:member).permit(:title, :first_name, :last_name, :job_title, :organisation, :email)
     end
