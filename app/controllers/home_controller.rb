@@ -1,4 +1,5 @@
 class HomeController < ApplicationController
+  before_action :validate_token, only: [:rsvp, :rsvp_update]
 
   def index
     @events = Event.where("date >= :now", {now: Date.today})
@@ -18,12 +19,6 @@ class HomeController < ApplicationController
   end
 
   def rsvp
-    if params[:token] && token_record = MemberToken.find_by(token: params[:token])
-      @token = token_record.token
-      @member = token_record.member
-    else
-      redirect_to '/sign_up'
-    end
   end
 
   def rsvp_update
@@ -43,6 +38,15 @@ class HomeController < ApplicationController
 
     def member_params
       params.require(:member).permit(:title, :first_name, :last_name, :job_title, :organisation, :email)
+    end
+
+    def validate_token
+      if params[:token] && token_record = MemberToken.find_by(token: params[:token])
+        @token = token_record.token
+        @member = token_record.member
+      else
+        redirect_to '/sign_up'
+      end
     end
 
 end
