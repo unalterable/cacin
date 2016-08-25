@@ -11,8 +11,8 @@
   <body>
 
     <%= render partial: "layouts/navbar" %>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <%= "<div class='alert alert-info'>#{notice}</div>".html_safe if notice %>
+    <%= "<div class='alert alert-danger'>#{alert}</div>".html_safe if alert %>
     <div class="container">
       <%= yield %>
     </div>
