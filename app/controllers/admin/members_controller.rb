@@ -49,9 +49,6 @@ class Admin::MembersController < ApplicationController
   # PATCH/PUT /members/1
   # PATCH/PUT /members/1.json
   def update
-    p '======================================2'
-    p params
-    p params[:id]
     respond_to do |format|
       if @member.update(member_params)
         format.html { redirect_to admin_member_path(@member), notice: 'Member was successfully updated.' }
