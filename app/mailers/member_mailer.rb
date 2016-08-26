@@ -2,7 +2,7 @@ class MemberMailer < ApplicationMailer
 
   default from: 'CACIN Events <events@cacin.co.uk>'
 
-  before_action :pause
+  after_action :pause
 
   def invitation(args)
     email( args.slice(:to, :subject, :html, :text) )
@@ -29,7 +29,7 @@ class MemberMailer < ApplicationMailer
 
     def pause
       puts "=============="
-      puts "Pausing before email: "
+      puts "Pausing after email: "
       5.times do |x|
         puts 5 - x
         sleep(1)
