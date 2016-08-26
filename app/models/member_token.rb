@@ -1,6 +1,6 @@
 class MemberToken < ApplicationRecord
   belongs_to :member, required: true
-  belongs_to :event, required: false
+  belongs_to :rsvp, required: false
 
   before_create { self.token = gen_token }
 
