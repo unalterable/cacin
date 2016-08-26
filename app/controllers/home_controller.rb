@@ -57,7 +57,7 @@ class HomeController < ApplicationController
         @token = token_record.token
         @member = token_record.member
         @rsvp = token_record.rsvp
-        @event = @rsvp.event
+        @event = @rsvp ? @rsvp.event : nil
       else
         redirect_to '/sign_up'
       end
