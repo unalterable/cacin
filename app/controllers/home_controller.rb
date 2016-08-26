@@ -56,8 +56,8 @@ class HomeController < ApplicationController
       if params[:token] && token_record = MemberToken.find_by(token: params[:token])
         @token = token_record.token
         @member = token_record.member
-        @event = token_record.event
-        @rsvp = Rsvp.find_or_initialize_by( member: @member, event: @event)
+        @rsvp = token_record.rsvp
+        @event = @rsvp.event
       else
         redirect_to '/sign_up'
       end
