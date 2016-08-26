@@ -5,7 +5,7 @@
         <%= form_tag(request_token_email_path, method: "post") do %>
         <%= hidden_field_tag(:email, member.email) %>
         <%= member.email %>
-         is already taken by a member in our database. If this is you we can email you a link so you can alter your details:   
+         is already taken by a member in our database. If this is you we can email you a link so you can alter your details:
         <%= submit_tag("Request Email") %>
       <% end %>
       <% else %>
@@ -26,36 +26,39 @@
       <%= select_tag(:rsvp, options_for_select([
       ['Attending', 'attending'],
       ['Not Attending', 'not_attending']
-      ], rsvp.status || 'attending')) %>
+      ], rsvp.status || 'attending'),
+      class: "form-control input-lg" ) %>
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :title %>
-    <%= f.text_field :title %>
+    <%= f.text_field :title, class: "form-control input-lg" %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :first_name %>
-    <%= f.text_field :first_name %>
+    <%= f.text_field :first_name, class: "form-control input-lg" %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :last_name %>
-    <%= f.text_field :last_name %>
+    <%= f.text_field :last_name, class: "form-control input-lg" %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :job_title %>
-    <%= f.text_field :job_title %>
+    <%= f.text_field :job_title, class: "form-control input-lg" %>
   </div>
-  <div class="field">
+
+  <div class="form-group">
     <%= f.label :organisation %>
-    <%= f.text_field :organisation %>
+    <%= f.text_field :organisation, class: "form-control input-lg" %>
   </div>
-  <div class="field">
+
+  <div class="form-group">
     <%= f.label :email %>
-    <%= f.text_field :email %>
+    <%= f.text_field :email, class: "form-control input-lg" %>
   </div>
 
   <div class="actions">
