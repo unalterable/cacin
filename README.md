@@ -17,6 +17,7 @@
     - pass the event_email to the EventMailer and call deliver_later
 
 
+- rename memberToken to token
 - create a token controller
 
 
