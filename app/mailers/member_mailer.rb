@@ -1,4 +1,4 @@
-tclass MemberMailer < ApplicationMailer
+class MemberMailer < ApplicationMailer
 
   default from: 'CACIN Events <events@cacin.co.uk>'
 
