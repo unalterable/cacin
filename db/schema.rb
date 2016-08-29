@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160829171530) do
+ActiveRecord::Schema.define(version: 20160829173238) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 20160829171530) do
     t.text     "plain_text_template"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
+    t.string   "subject"
     t.index ["event_id"], name: "index_event_mails_on_event_id", using: :btree
   end
 
@@ -63,6 +64,8 @@ ActiveRecord::Schema.define(version: 20160829171530) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "rsvp_id"
+    t.integer  "times_used"
+    t.text     "notes"
     t.index ["member_id"], name: "index_member_tokens_on_member_id", using: :btree
     t.index ["rsvp_id"], name: "index_member_tokens_on_rsvp_id", using: :btree
   end

@@ -1,17 +1,16 @@
 # To Do
-- change invitations to event_emails
-  - ?rails d scaffold_controller invitations:admin
-  - ?rails d model invitations
-  - rails g scaffold_controller admin:event_emails
+- change invitations to event_mails <b>-done</b>
+  - rails g model event_mails event:references name:string subject:string <b>-done</b>
   - test
-- add EventMailer
-  - refactor code from membermailer
-- rails g model EventEmailLog event_email:references member:references
-- rails g migration AddTimesUsedAndNotesToRsvps times_used:integer notes:text
+- add EventMailer  <b>-done</b>
+  - refactor code from membermailer <b>-done</b>
+  - add templating methods <b>-started</b>
+- rails g model EventMailLog event_mail:references member:references member_token:references <b>-done</b>
+- rails g migration AddTimesUsedAndNotesToMemberTokens times_used:integer notes:text  <b>-done</b>
   - maybe require notes to exist
   - ensure token times_used is incremented when it's checked
-- add after_action for event_email to create new event_email_log
-- move pause into application mailer
+- move pause into application mailer so it is enforced for all emails <b>-done</b>
+- add after_action for event_email to create new event_email_log  <b>-done</b>
 - create event_email_job class that:
 - takes an event_email object
   - takes a list of members
