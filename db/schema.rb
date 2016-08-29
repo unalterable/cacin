@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160829165127) do
+ActiveRecord::Schema.define(version: 20160829171530) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "event_mail_logs", force: :cascade do |t|
+    t.integer  "event_mail_id"
+    t.integer  "member_id"
+    t.integer  "member_token_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["event_mail_id"], name: "index_event_mail_logs_on_event_mail_id", using: :btree
+    t.index ["member_id"], name: "index_event_mail_logs_on_member_id", using: :btree
+    t.index ["member_token_id"], name: "index_event_mail_logs_on_member_token_id", using: :btree
+  end
 
   create_table "event_mails", force: :cascade do |t|
     t.integer  "event_id"
@@ -95,6 +106,9 @@ ActiveRecord::Schema.define(version: 20160829165127) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "event_mail_logs", "event_mails"
+  add_foreign_key "event_mail_logs", "member_tokens"
+  add_foreign_key "event_mail_logs", "members"
   add_foreign_key "event_mails", "events"
   add_foreign_key "invitations", "events"
   add_foreign_key "member_tokens", "members"
