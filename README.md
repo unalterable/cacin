@@ -1,6 +1,11 @@
 # To Do
 - change invitations to event_emails
+  - ?rails d scaffold_controller invitations:admin
+  - ?rails d model invitations
+  - rails g scaffold_controller admin:event_emails
+  - test
 - add EventMailer
+  - refactor code from membermailer
 - rails g model EventEmailLog event_email:references member:references
 - rails g migration AddTimesUsedAndNotesToRsvps times_used:integer notes:text
   - maybe require notes to exist
