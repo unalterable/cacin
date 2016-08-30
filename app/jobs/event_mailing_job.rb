@@ -11,14 +11,13 @@ class EventMailingJob < ApplicationJob
   private
 
     def create_email(member)
-      rsvp = get_rsvp(member, @event_mail.event)
-      token = get_token(member, rsvp)
+      token = get_rsvp_token(member) # if @event_mail.includes_rsvp?
       EventMailer.invitation(member, @event_mail, token)
     end
 
-    def get_token(member, rsvp)
+    def get_rsvp_token(member)
       MemberToken.create( member: member,
-                          rsvp: rsvp,
+                          rsvp: get_rsvp(member, @event_mail.event),
                           notes: token_notes)
     end
 
