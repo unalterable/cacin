@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @event_mail.name %>
+</p>
+
+<p>
+  <strong>Event Name:</strong>
+  <%= link_to @event_mail.event.name, admin_event_path(@event_mail.event)%>
+</p>
+
+
+<div class="well">
+  <%= render "shared/event_mail", event_mail: @event_mail %>
+</div>
+
+
+<%= link_to 'Edit', edit_admin_mailing_path(@event_mail) %> |
+<%= link_to 'Back', admin_mailings_path %>

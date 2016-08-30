@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Event Mailings</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Event Name</th>
+      <th>Name</th>
+      <th>Subject Line</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @event_mails.each do |event_mail| %>
+      <tr>
+        <td><%= event_mail.event.name %>
+        <td><%= event_mail.name %>
+        <td><%= event_mail.subject %>
+        <td><%= link_to 'Show', admin_mailing_path(event_mail) %></td>
+        <td><%= link_to 'Edit', edit_admin_mailing_path(event_mail) %></td>
+        <td><%= link_to 'Destroy', admin_mailing_path(event_mail), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Admin Mailing', new_admin_mailing_path %>

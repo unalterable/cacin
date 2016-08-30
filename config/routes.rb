@@ -16,8 +16,8 @@ Rails.application.routes.draw do
   namespace :admin do
     root to: "events#index"
     resources :events
-    resources :invitations
     resources :members
+    resources :mailings
     get '/members/export', to: 'members#export'
     post '/members/import', to: 'members#import'
   end

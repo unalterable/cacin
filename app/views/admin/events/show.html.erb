@@ -17,7 +17,6 @@
 
 <p>
   <%= render "shared/event", event: @event %>
-
 </p>
 <p>
   <strong>Mailings</strong>
@@ -25,5 +24,6 @@
     <li><%= mail.name %></li>
   <% end %>
 </p>
+
 <%= link_to 'Edit', edit_admin_event_path(@event) %> |
 <%= link_to 'Back', admin_events_path %>

@@ -1,0 +1,19 @@
+
+<p>
+  <strong>Subject Line:</strong>
+  <%= @event_mail.subject %>
+</p>
+
+<p>
+  <strong>HTML Template:</strong>
+  <div class="jumbotron">
+    <%= event_mail.render_html.html_safe %>
+  </div>
+</p>
+
+<p>
+  <strong>Plain Text Template:</strong>
+  <div class="jumbotron">
+    <%= event_mail.render_plain_text.html_safe %>
+  </div>
+</p>
