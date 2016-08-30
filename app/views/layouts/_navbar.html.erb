@@ -5,8 +5,7 @@ menu =
 admin =
 [ { name: '| Admin:',   route: '/admin' },
   { name: 'Events',     route: admin_events_path },
-  { name: 'Members',    route: admin_members_path },
-  { name: 'Invitations',route: admin_invitations_path }]
+  { name: 'Members',    route: admin_members_path }]
  %>
 <%
 if user_signed_in?#params[:controller][0..4] == 'admin'

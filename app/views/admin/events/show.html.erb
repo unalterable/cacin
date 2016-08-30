@@ -20,9 +20,9 @@
 
 </p>
 <p>
-  <strong>Invitations</strong>
-  <% @event.invitations.each do |invitation| %>
-    <li><%= link_to invitation.name, admin_invitation_path(invitation) %></li>
+  <strong>Mailings</strong>
+  <% @event.event_mails.each do |mail| %>
+    <li><%= mail.name %></li>
   <% end %>
 </p>
 <%= link_to 'Edit', edit_admin_event_path(@event) %> |
