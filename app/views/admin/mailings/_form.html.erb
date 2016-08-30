@@ -15,16 +15,14 @@
 
   <div class='form_group'>
     <%= f.label :event_id, 'Event' %>
-    <%= f.select(:event_id, options_for_select(
-          Event.all.map do |event|
-            [ event.name, event.id ]
-          end
-          # [
-          # ['Attending', 'attending'],
-          # ['Not Attending', 'not_attending']
-          # ]
-          ),  {default: event_mail.event},
-              {class: "form-control input-lg"} ) %>
+    <%= f.select(:event_id,
+                  options_for_select(Event.all.map do |event|
+                    [ event.name, event.id ]
+                  end),
+                  {default: event_mail.event},
+                  {class: "form-control input-lg"}
+                )
+    %>
   </div>
 
   <div class="form-group">
