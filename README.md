@@ -22,10 +22,10 @@
   - add a sent? flag for event_mail model <b>-done</b>
   - EventMail: includes_RSVP? flag <b>-done</b>
   - Add templating <b>-done</b>
+- Rsvp: if new then status = 'Unanswered' <b>-done</b>
 - create a scaffold_controller for mailings
   - rails g scaffold_controller admin/mailing --model-name:event_mail
   - create form for sending mailings
-- Rsvp: if new then status = 'Unanswered'
 
 
 - rename memberToken to token
