@@ -1,7 +1,8 @@
 class MemberMailer < ApplicationMailer
 
   def token_link(token)
-    basic_email(  to: token.member.email,
+    basic_email(
+            to: token.member.email,
             subject: "CACIN: request to alter details",
             html: "You (or someone claiming to have your email address) have requested to alter your CACIN member details.
             <br>

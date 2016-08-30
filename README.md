@@ -19,13 +19,13 @@
     - create a new token for that member and that RSVP with a note about it's creation <b>-done</b>
     - pass the event_email to the EventMailer and call deliver_later <b>-done</b>
 - EventMail:
-  - add a sent? flag for event_mail model
-  - EventMail: includes_RSVP? flag
-  - Add templating
-- Rsvp: if new say status=unanswered
+  - add a sent? flag for event_mail model <b>-done</b>
+  - EventMail: includes_RSVP? flag <b>-done</b>
+  - Add templating <b>-done</b>
 - create a scaffold_controller for mailings
   - rails g scaffold_controller admin/mailing --model-name:event_mail
   - create form for sending mailings
+- Rsvp: if new then status = 'Unanswered'
 
 
 - rename memberToken to token

@@ -8,7 +8,7 @@ class EventMailer < ApplicationMailer
     basic_email(  to: to,
                   subject: subject,
                   html: html,
-                  plain_text: plain_text)
+                  text: plain_text)
   end
 
   private
@@ -26,13 +26,19 @@ class EventMailer < ApplicationMailer
     end
 
     def html
-      @event_mail.render_html(member: @member,
-                              member_token: @member_token)
+      @event_mail.render_html(template_vars)
     end
 
     def plain_text
-      @event_mail.render_plain_text(member: @member,
-                              member_token: @member_token)
+      @event_mail.render_plain_text(template_vars)
+    end
+
+    def template_vars
+      # dup 3
+      rsvp_url = rsvp_url(token: @member_token.token) if @member_token
+      { member: @member,
+        member_token: @member_token,
+        rsvp_url: rsvp_url }
     end
 
     def log

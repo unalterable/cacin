@@ -11,7 +11,7 @@ class EventMailingJob < ApplicationJob
   private
 
     def create_email(member)
-      token = get_rsvp_token(member) # if @event_mail.includes_rsvp?
+      token = get_rsvp_token(member) if @event_mail.includes_rsvp
       EventMailer.invitation(member, @event_mail, token)
     end
 
