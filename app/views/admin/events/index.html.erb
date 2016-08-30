@@ -23,7 +23,7 @@
         <td style='max-width: 350px; overflow: hidden; font-size: 8px;'><%= event.details %></td>
         <td>
           <% event.event_mails.each do |mail| %>
-            <li><%= mail.name %></li>
+            <li><%= link_to mail.name, admin_mailing_path(mail) %></li>
           <% end %>
         </td>
         <td><%= link_to 'Show', admin_event_path(event) %></td>
