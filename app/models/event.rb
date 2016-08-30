@@ -1,3 +1,3 @@
 class Event < ApplicationRecord
-  has_many :invitations
+  has_many :event_mails
 end

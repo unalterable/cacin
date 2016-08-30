@@ -1,12 +1,11 @@
 class EventMail < ApplicationRecord
   belongs_to :event
 
-  def html
+  def render_html(args)
     html_template
   end
 
-  def plain_text
+  def render_plain_text(args)
     plain_text_template
   end
-
 end

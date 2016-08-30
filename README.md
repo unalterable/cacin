@@ -11,14 +11,21 @@
   - ensure token times_used is incremented when it's checked
 - move pause into application mailer so it is enforced for all emails <b>-done</b>
 - add after_action for event_email to create new event_email_log  <b>-done</b>
-- create event_email_job class that:
-- takes an event_email object
-  - takes a list of members
+- create event_mailing_job class that:
+  - takes an event_mail object
+  - takes a list of member ID
   - loops through each member and:
     - finds_or_creates an RSVP for that member and that event
-      - if new say status=unanswered
     - create a new token for that member and that RSVP with a note about it's creation
     - pass the event_email to the EventMailer and call deliver_later
+- EventMail:
+  - add a sent? flag for event_mail model
+  - EventMail: includes_RSVP? flag
+  - Add templating
+- Rsvp: if new say status=unanswered
+- create a scaffold_controller for mailings
+  - rails g scaffold_controller admin/mailing --model-name:event_mail
+  - create form for sending mailings
 
 
 - rename memberToken to token
