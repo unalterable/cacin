@@ -21,12 +21,12 @@
         <td><%= event.date %></td>
         <td><%= event.location %></td>
         <td style='max-width: 350px; overflow: hidden; font-size: 10px;'><%= event.details %></td>
-        <td><%= link_to 'Show', admin_event_path(event) %></td>
         <td>
           <% event.event_mails.each do |mail| %>
             <li><%= mail.name %></li>
           <% end %>
         </td>
+        <td><%= link_to 'Show', admin_event_path(event) %></td>
         <td><%= link_to 'Edit', edit_admin_event_path(event) %></td>
         <td><%= link_to 'Destroy', admin_event_path(event), method: :delete, data: {confirm: 'Are you sure' } %></td>
 
