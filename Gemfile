@@ -40,3 +40,5 @@ gem 'figaro'
 gem 'sidekiq'
 
 gem 'mustache'
+
+gem 'bootstrap_form'

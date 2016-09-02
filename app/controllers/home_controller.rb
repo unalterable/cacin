@@ -16,12 +16,13 @@ class HomeController < ApplicationController
   end
 
   def rsvp_update
+    @member.member_input = true
     @rsvp.status = params[:rsvp]
     if @member.update(member_params)
       @rsvp.save
-      redirect_to rsvp_path(token: params[:token]), notice: 'Member was successfully updated.'
+      redirect_to rsvp_path(token: params[:token]), notice: 'RSVP was saved successfully.'
     else
-      render :edit
+      render :rsvp
     end
   end
 

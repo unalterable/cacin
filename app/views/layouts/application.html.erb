@@ -14,8 +14,10 @@
 
     <%= "<div class='alert alert-info'>#{notice}</div>".html_safe if notice %>
     <%= "<div class='alert alert-danger'>#{alert}</div>".html_safe if alert %>
+
     <div class="container">
       <%= yield %>
     </div>
+    
   </body>
 </html>
