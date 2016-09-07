@@ -15,9 +15,6 @@ class Admin::MailingsController < ApplicationController
 
   def sender
     members = Member.find(params['members'])
-    p '=================================='
-    p @event_mail
-    p members
     EventMailingJob.perform_later(@event_mail, members)
   end
 
