@@ -1,5 +1,5 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'events@cacin.co.uk'
+  default from: Figaro.env.events_email
   layout 'mailer'
 
   after_action :pause
