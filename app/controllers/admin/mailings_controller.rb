@@ -1,5 +1,5 @@
 class Admin::MailingsController < ApplicationController
-  before_action :set_event_mail, only: [:show, :edit, :update, :destroy]
+  before_action :set_event_mail, only: [:show, :sender, :edit, :update, :destroy]
 
   # GET /admin/mailings
   # GET /admin/mailings.json
@@ -10,6 +10,15 @@ class Admin::MailingsController < ApplicationController
   # GET /admin/mailings/1
   # GET /admin/mailings/1.json
   def show
+    @members = Member.all
+  end
+
+  def sender
+    members = Member.find(params['members'])
+    p '=================================='
+    p @event_mail
+    p members
+    EventMailingJob.perform_later(@event_mail, members)
   end
 
   # GET /admin/mailings/new

@@ -10,10 +10,21 @@
   <%= link_to @event_mail.event.name, admin_event_path(@event_mail.event)%>
 </p>
 
+<%= form_tag admin_mailing_sender_path, method: 'post' do %>
+
+<div class="well pre-scrollable">
+  <%= render "member_selector", members: @members %>
+</div>
+
+
+  <%= submit_tag("Send") %>
+
+<% end %>
 
 <div class="well">
   <%= render "shared/event_mail", event_mail: @event_mail %>
 </div>
+
 
 
 <%= link_to 'Edit', edit_admin_mailing_path(@event_mail) %> |

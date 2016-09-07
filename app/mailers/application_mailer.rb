@@ -10,7 +10,15 @@ class ApplicationMailer < ActionMailer::Base
       format.text{render( text: args[:text] )}
     end
   end
-  
+
+  def email_admin(note)
+    basic_email(to: Figaro.env.admin_email,
+                subject: "Admin Notification from #{root_url}",
+                html: note,
+                text: note )
+  end
+
+
   private
 
     def pause
