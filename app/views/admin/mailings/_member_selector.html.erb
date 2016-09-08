@@ -1,4 +1,5 @@
 <h3>Send to:</h3>
+<input type="checkbox" id="selectAll" value="selectAll"> Select / Deselect All<br>
 <table class='table table-striped table-condensed small'>
   <thead>
     <tr>
@@ -35,3 +36,18 @@
     <% end %>
   </tbody>
 </table>
+
+<script>
+$('#selectAll').click(function() {
+  console.log('clicked')
+  if (this.checked) {
+    $(':checkbox').each(function() {
+      this.checked = true;
+    });
+  } else {
+    $(':checkbox').each(function() {
+      this.checked = false;
+    });
+  }
+});
+</script>
