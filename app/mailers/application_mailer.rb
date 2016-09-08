@@ -4,6 +4,8 @@ class ApplicationMailer < ActionMailer::Base
 
   after_action :pause
 
+  PAUSE_LENGTH = 60 #seconds
+
   def basic_email(args)
     mail( args.slice(:to, :subject) ) do |format|
       format.html{render( html: args[:html].html_safe )}
@@ -22,10 +24,9 @@ class ApplicationMailer < ActionMailer::Base
   private
 
     def pause
-      puts "=============="
-      puts "Pausing after email: 60secs"
-      sleep(60)
-      puts "=============="
+      puts "Email rendererd, pending send. Pausing: #{ PAUSE_LENGTH }secs..."
+      sleep(PAUSE_LENGTH)
+      puts "Email. Pausing finished."
     end
 
 end
