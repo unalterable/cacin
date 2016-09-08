@@ -6,7 +6,8 @@ admin =
 [ { name: '| Admin:',   route: '/admin' },
   { name: 'Events',     route: admin_events_path },
   { name: 'Members',    route: admin_members_path },
-  { name: 'Mailings',    route: admin_mailings_path }]
+  { name: 'Mailings',    route: admin_mailings_path },
+  { name: 'Event Mail Logs',    route: admin_event_mail_logs_path }]
 
 menu += admin if user_signed_in?
 

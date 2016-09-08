@@ -23,7 +23,7 @@ class ApplicationMailer < ActionMailer::Base
 
     def pause
       puts "=============="
-      puts "Pausing after email: "
+      puts "Pausing after email: 60secs"
       sleep(60)
       puts "=============="
     end

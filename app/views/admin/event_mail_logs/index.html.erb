@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Event Mail Logs</h1>
+
+<table class='table table-striped table-condensed small'>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Event Mail</th>
+      <th>Member</th>
+      <th>Member Token</th>
+      <th>Created</th>
+      <th>Updated</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @event_mail_logs.each do |event_mail_log| %>
+      <tr>
+        <td><%= event_mail_log.id %></td>
+        <td><%= event_mail_log.event_mail.name %></td>
+        <td><%= event_mail_log.member.id %></td>
+        <td><%= event_mail_log.member_token.id %></td>
+        <td><%= event_mail_log.created_at %></td>
+        <td><%= event_mail_log.updated_at %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
