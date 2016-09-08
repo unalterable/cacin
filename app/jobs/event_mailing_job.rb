@@ -1,11 +1,13 @@
 class EventMailingJob < ApplicationJob
   queue_as :default
 
+  ADMIN_NOTIFICATION_FREQ = 10
+
   def perform(event_mail, members)
     @event_mail = event_mail
     @members = members
     @members.each_with_index do |member, i|
-      notify_admin(i) if i%50 == 0
+      notify_admin(i) if i%ADMIN_NOTIFICATION_FREQ == 0
       email_member(member)
     end
     notify_admin("ALL")
