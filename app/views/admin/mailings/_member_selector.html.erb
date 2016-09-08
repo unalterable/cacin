@@ -17,15 +17,12 @@
     <tbody>
       <% members.each do |member| %>
         <%
-          rsvp = rsvps.find_by(member: member)
-          if rsvp
-            theme = "warning"
-            theme = "danger" if rsvp.status == "not_attending"
-            theme = "success" if rsvp.status == "attending"
+          if EventMailLog.find_by(event_mail: event_mail, member: member)
+            theme = "info"
           end
         %><tr class="<%= theme %>">
           <td><%=
-              check_box_tag 'members[]', member.id, !rsvp
+              check_box_tag 'members[]', member.id, !theme
           %></td>
           <td><%= member.priority %></td>
           <td><%= member.id %></td>
