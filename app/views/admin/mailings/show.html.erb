@@ -1,23 +1,20 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
-  <%= @event_mail.name %>
+  <strong>Name:</strong> <%= @event_mail.name %>
 </p>
 
 <p>
-  <strong>Event Name:</strong>
-  <%= link_to @event_mail.event.name, admin_event_path(@event_mail.event)%>
+  <strong>Event:</strong> <%= link_to @event_mail.event.name, admin_event_path(@event_mail.event)%>
 </p>
 
 <%= bootstrap_form_tag url: admin_mailing_sender_path, method: 'post' do |f| %>
-
   <div class="well pre-scrollable">
     <%= render "member_selector", members: @members, rsvps: @rsvps_for_event%>
   </div>
-
-  <center><%= f.submit("Send") %></center>
-
+  <center>
+    <%= f.submit("Send") %>
+  </center>
 <% end %>
 
 <br />
@@ -30,6 +27,5 @@
 
 
 <div class="well">
-  <h3>RSVPs for this event:</h3>
   <%= render "rsvps", rsvps_for_event: @rsvps_for_event %>
 </div>

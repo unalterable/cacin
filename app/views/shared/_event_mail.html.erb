@@ -7,7 +7,7 @@
 <p>
   <strong>HTML Template:</strong>
   <div class="jumbotron">
-    <%= event_mail.html_template.html_safe %>
+    <%= event_mail.html_template %>
   </div>
 </p>
 
@@ -15,5 +15,19 @@
   <strong>Plain Text Template:</strong>
   <div class="jumbotron">
     <%= event_mail.plain_text_template.html_safe %>
+  </div>
+</p>
+
+<p>
+  <strong>HTML Sample:</strong>
+  <div class="jumbotron">
+    <%= event_mail.html_sample.html_safe %>
+  </div>
+</p>
+
+<p>
+  <strong>Plain Text Sample:</strong>
+  <div class="jumbotron">
+    <%= event_mail.plain_text_sample.html_safe %>
   </div>
 </p>
