@@ -10,22 +10,26 @@
   <%= link_to @event_mail.event.name, admin_event_path(@event_mail.event)%>
 </p>
 
-<%= form_tag admin_mailing_sender_path, method: 'post' do %>
+<%= bootstrap_form_tag url: admin_mailing_sender_path, method: 'post' do |f| %>
 
-<div class="well pre-scrollable">
-  <%= render "member_selector", members: @members %>
-</div>
+  <div class="well pre-scrollable">
+    <%= render "member_selector", members: @members, rsvps: @rsvps_for_event%>
+  </div>
 
-
-  <%= submit_tag("Send") %>
+  <center><%= f.submit("Send") %></center>
 
 <% end %>
 
+<br />
+
 <div class="well">
   <%= render "shared/event_mail", event_mail: @event_mail %>
+  <%= link_to 'Edit', edit_admin_mailing_path(@event_mail) %> |
+  <%= link_to 'Back', admin_mailings_path %>
 </div>
 
 
-
-<%= link_to 'Edit', edit_admin_mailing_path(@event_mail) %> |
-<%= link_to 'Back', admin_mailings_path %>
+<div class="well">
+  <h3>RSVPs for this event:</h3>
+  <%= render "rsvps", rsvps_for_event: @rsvps_for_event %>
+</div>
