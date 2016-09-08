@@ -1,42 +1,43 @@
 <h3>Send to:</h3>
 <input type="checkbox" id="selectAll" value="selectAll"> Select / Deselect All<br>
-<table class='pre-scrollable table table-striped table-condensed small'>
-  <thead>
-    <tr>
-      <th>Select</th>
-      <th>Priority</th>
-      <th>ID</th>
-      <th>Name</th>
-      <th>Job title</th>
-      <th>Company</th>
-      <th>Email</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% members.each do |member| %>
-      <%
-        rsvp = rsvps.find_by(member: member)
-        if rsvp
-          theme = "warning"
-          theme = "danger" if rsvp.status == "not_attending"
-          theme = "success" if rsvp.status == "attending"
-        end
-      %><tr class="<%= theme %>">
-        <td><%=
-            check_box_tag 'members[]', member.id, !rsvp
-        %></td>
-        <td><%= member.priority %></td>
-        <td><%= member.id %></td>
-        <td><%= "#{member.first_name} #{member.last_name}" %></td>
-        <td><%= member.job_title %></td>
-        <td><%= member.organisation %></td>
-        <td><%= member.email %></td>
+<div class="pre-scrollable">
+  <table class='table table-striped table-condensed small'>
+    <thead>
+      <tr>
+        <th>Select</th>
+        <th>Priority</th>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Job title</th>
+        <th>Company</th>
+        <th>Email</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
+    <tbody>
+      <% members.each do |member| %>
+        <%
+          rsvp = rsvps.find_by(member: member)
+          if rsvp
+            theme = "warning"
+            theme = "danger" if rsvp.status == "not_attending"
+            theme = "success" if rsvp.status == "attending"
+          end
+        %><tr class="<%= theme %>">
+          <td><%=
+              check_box_tag 'members[]', member.id, !rsvp
+          %></td>
+          <td><%= member.priority %></td>
+          <td><%= member.id %></td>
+          <td><%= "#{member.first_name} #{member.last_name}" %></td>
+          <td><%= member.job_title %></td>
+          <td><%= member.organisation %></td>
+          <td><%= member.email %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 <script>
 $('#selectAll').click(function() {
   console.log('clicked')
