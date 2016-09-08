@@ -7,7 +7,8 @@ Rails.application.routes.draw do
     to: 'home#about_us'
 
   get '/sign_up',
-    to: 'home#sign_up'
+    to: 'home#sign_up',
+    as: 'sign_up'
 
   post '/request_token_email',
     to: 'home#request_token_email',
