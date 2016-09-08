@@ -8,7 +8,7 @@
       <center>
         <h2><%= event.name %></h2>
         <br />
-        <b><%= event.date %></b>
+        <b><%= event.date.to_formatted_s(:long_ordinal)    %></b>
         <br />
         <i><%= event.location %></i>
         <br />

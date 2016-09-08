@@ -1,3 +1,4 @@
-<h1>RSVP</h1>
-
+<h1>RSVP for: <%= @member.email %></h1>
+(If this is not you, please visit <%= link_to "here", sign_up_path %> to sign up.)
+<br /><br />
 <%= render 'member_form', member: @member, token: @token, event: @event, rsvp: @rsvp %>
