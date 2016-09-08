@@ -9,12 +9,10 @@
 </p>
 
 <%= bootstrap_form_tag url: admin_mailing_sender_path, method: 'post' do |f| %>
-  <div class="well pre-scrollable">
+  <div class="well">
     <%= render "member_selector", members: @members, rsvps: @rsvps_for_event%>
+    <span class="right"><%= f.submit("Send") %></span>
   </div>
-  <center>
-    <%= f.submit("Send") %>
-  </center>
 <% end %>
 
 <br />
