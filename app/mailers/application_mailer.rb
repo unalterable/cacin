@@ -24,10 +24,7 @@ class ApplicationMailer < ActionMailer::Base
     def pause
       puts "=============="
       puts "Pausing after email: "
-      5.times do |x|
-        puts 5 - x
-        sleep(1)
-      end
+      sleep(60)
       puts "=============="
     end
 
