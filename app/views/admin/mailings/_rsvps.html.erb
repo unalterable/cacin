@@ -13,7 +13,9 @@
 
   <tbody>
     <% rsvps_for_event.sort_by{|rsvp| rsvp.status.downcase}.each_with_index do |rsvp, i| %>
-      <tr>
+      <%theme = "danger" if rsvp.status == "not_attending"
+        theme = "success" if rsvp.status == "attending" %>
+      <tr class="<%= theme %>">
         <td><%= i+1 %>: (#<%= rsvp.id %>)</td>
         <td>
           <%= rsvp.member.first_name%> <%=rsvp.member.last_name %>
