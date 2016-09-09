@@ -11,7 +11,6 @@ class Admin::MailingsController < ApplicationController
   # GET /admin/mailings/1.json
   def show
     @members = Member.all
-    @rsvps_for_event = Rsvp.where(event: @event_mail.event)
   end
 
   def sender

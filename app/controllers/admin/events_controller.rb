@@ -9,6 +9,7 @@ class Admin::EventsController < ApplicationController
 
   # GET /admin/events/1
   def show
+    @rsvps_for_event = Rsvp.where(event: @event)
   end
 
   # GET /admin/events/new
