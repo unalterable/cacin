@@ -22,7 +22,8 @@ Rails.application.routes.draw do
     to: 'home#rsvp_update', as: 'rsvp_member'
 
   namespace :admin do
-    root to: "events#index"
+    root to: "events#index",
+      as: 'root'
     resources :events
     resources :members
     post '/mailings/send/:id',

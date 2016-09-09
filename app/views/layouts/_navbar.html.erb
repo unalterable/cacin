@@ -1,13 +1,17 @@
 <%
+
 menu =
-[ { name: 'Home',     route: root_path     },
-  { name: 'About Us', route: about_us_path }]
+[ { name: 'Home',             route: root_path     },
+  { name: 'Sign Up',          route: sign_up_path  },
+  { name: 'About Us',         route: about_us_path }]
+
 admin =
-[ { name: '| Admin:',   route: '/admin' },
-  { name: 'Events',     route: admin_events_path },
-  { name: 'Members',    route: admin_members_path },
-  { name: 'Mailings',    route: admin_mailings_path },
-  { name: 'Event Mail Logs',    route: admin_event_mail_logs_path }]
+[ { name: ' | ',              route: ""                         },
+  { name: 'Admin:',           route: admin_root_path            },
+  { name: 'Events',           route: admin_events_path          },
+  { name: 'Members',          route: admin_members_path         },
+  { name: 'Mailings',         route: admin_mailings_path        },
+  { name: 'Event Mail Logs',  route: admin_event_mail_logs_path }]
 
 menu += admin if user_signed_in?
 
