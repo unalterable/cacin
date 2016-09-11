@@ -6,6 +6,7 @@ class EventMailingJob < ApplicationJob
   def perform(event_mail, members)
     @event_mail = event_mail
     @members = members
+    flagEventMailAsSent
     @members.each_with_index do |member, i|
       notify_admin(i) if i%ADMIN_NOTIFICATION_FREQ == 0
       email_member(member)
@@ -14,6 +15,10 @@ class EventMailingJob < ApplicationJob
   end
 
   private
+
+    def flagEventMailAsSent
+      @event_mail.update(sent: true) unless @event_mail.sent
+    end
 
     def email_member(member)
       create_email(member).deliver_later
