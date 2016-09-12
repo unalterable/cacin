@@ -16,7 +16,7 @@ class Admin::MailingsController < ApplicationController
   def sender
     members = params['members'] ? Member.find(params['members']) : []
     EventMailingJob.perform_later(@event_mail, members)
-      redirect_to admin_mailing_path(@event_mail), notice: "Mailing was successfully sent to #{members.count} members."
+    redirect_to admin_mailing_path(@event_mail), notice: "Mailing was successfully sent to #{members.count} members."
   end
 
   # GET /admin/mailings/new
