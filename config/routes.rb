@@ -21,14 +21,15 @@ Rails.application.routes.draw do
   patch '/rsvp_update.:id',
     to: 'home#rsvp_update', as: 'rsvp_member'
 
+  post '/email_admin',
+    to: 'home#email_admin', as: 'email_admin'
+
   namespace :admin do
-    root to: "events#index",
-      as: 'root'
+    root to: "events#index", as: 'root'
     resources :events
     resources :members
     post '/mailings/send/:id',
-      to: 'mailings#sender',
-      as: 'mailing_sender'
+      to: 'mailings#sender', as: 'mailing_sender'
     resources :mailings
     get '/members/export',
       to: 'members#export'

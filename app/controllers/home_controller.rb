@@ -15,6 +15,12 @@ class HomeController < ApplicationController
     @member = Member.new
   end
 
+  def email_admin
+    ApplicationMailer.email_admin("Email to Admin:<br /><br />
+    #{ params[:email_body] }").deliver_later
+    redirect_to about_us_path, notice: "Your email was successfully sent to the CACIN Director."
+  end
+
   def rsvp_update
     @member.member_input = true
     @rsvp.status = params[:rsvp]
