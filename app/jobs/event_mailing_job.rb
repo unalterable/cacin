@@ -1,7 +1,7 @@
 class EventMailingJob < ApplicationJob
   queue_as :default
 
-  ADMIN_NOTIFY_FREQ = 3
+  ADMIN_NOTIFY_FREQ = 20
 
   def perform(event_mail, members)
     @event_mail = event_mail
