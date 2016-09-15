@@ -13,8 +13,8 @@
 
 <p>
   <strong>Plain Text Template:</strong>
-  <div class="jumbotron">
-    <%= event_mail.plain_text_template.html_safe %>
+  <div class="jumbotron small">
+    <%= simple_format(event_mail.plain_text_template) %>
   </div>
 </p>
 
@@ -27,7 +27,7 @@
 
 <p>
   <strong>Plain Text Sample:</strong>
-  <div class="jumbotron">
-    <%= render text: event_mail.plain_text_sample.html_safe %>
+  <div class="jumbotron small">
+    <%= simple_format(event_mail.plain_text_sample)%>
   </div>
 </p>

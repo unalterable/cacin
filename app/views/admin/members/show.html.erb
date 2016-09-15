@@ -41,12 +41,12 @@
       <% @member.rsvps.each do |rsvp| %>
       <li class="list-group-item">
         <span class="badge">ID: <%= rsvp.id %></span>
+        <strong>Updated At:</strong>
+        <%= rsvp.updated_at.strftime("%H:%M - %d-%b-%y")  %><br />
         <strong>Event:</strong>
         <%= rsvp.event.name %><br />
         <strong>Status:</strong>
-        <%= rsvp.status %><br />
-        <strong>Updated At:</strong>
-        <%= rsvp.updated_at.strftime("%H:%M - %d-%b-%y")  %><br />
+        <%= rsvp.status %><br /><br />
       </li>
       <% end %>
   </ul>
@@ -61,12 +61,12 @@
           ID: #<%= token.id %><br />
           RSVP: #<%= token.rsvp.id %>
         </span>
+        <strong>Created At:</strong>
+        <%= token.created_at.strftime("%H:%M - %d-%b-%y")  %><br />
         <strong>Token:</strong>
         <%= token.token %><br />
         <strong>Notes:</strong>
-        <%= token.notes %><br />
-        <strong>Created At:</strong>
-        <%= token.created_at.strftime("%H:%M - %d-%b-%y")  %><br />
+        <%= simple_format(token.notes) %><br />
       </li>
       <% end %>
   </ol>

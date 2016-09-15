@@ -32,7 +32,9 @@ class EventMailingJob < ApplicationJob
 
     def get_rsvp_token(member)
       MemberToken.find_or_create_by( member: member,
-                                     rsvp: get_rsvp(member, @event_mail.event))
+                                     rsvp: get_rsvp(member, @event_mail.event)
+                                    ).add_notes( token_notes )
+
     end
 
     def get_rsvp(member, event)
@@ -41,7 +43,7 @@ class EventMailingJob < ApplicationJob
     end
 
     def token_notes
-      "Created at #{ Time.now } in the mailing of '##{ @event_mail.id }: #{ @event_mail.name }'"
+      "Used in the mailing of EventMail: '##{ @event_mail.id }: #{ @event_mail.name }'"
     end
 
     def notify_admin(i, member)

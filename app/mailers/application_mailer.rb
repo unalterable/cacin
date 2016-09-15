@@ -9,7 +9,7 @@ class ApplicationMailer < ActionMailer::Base
   def basic_email(args)
     mail( args.slice(:to, :subject) ) do |format|
       format.html{render( html: args[:html].html_safe )}
-      format.text{render( text: args[:text] )}
+      format.text{render( text: simple_format(args[:text]) )}
     end
   end
 
@@ -25,7 +25,7 @@ class ApplicationMailer < ActionMailer::Base
 
     def pause
       pause_length = rand(AVG_PAUSE_LENGTH*0.5...AVG_PAUSE_LENGTH*1.5).to_i
-      puts "Email rendererd, pending send. Pausing: #{ pause_length }secs..."
+      puts "Email rendererd, pending send. Pausing: #{ pause_length } secs..."
       sleep(pause_length)
       puts "Email. Pausing finished."
     end
