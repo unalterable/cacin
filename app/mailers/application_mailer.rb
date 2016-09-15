@@ -9,7 +9,7 @@ class ApplicationMailer < ActionMailer::Base
   def basic_email(args)
     mail( args.slice(:to, :subject) ) do |format|
       format.html{render( html: args[:html].html_safe )}
-      format.text{render( text: simple_format(args[:text]) )}
+      format.text{render( text: args[:text] )}
     end
   end
 

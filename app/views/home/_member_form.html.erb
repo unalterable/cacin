@@ -1,3 +1,6 @@
+<%=
+# This may contain forms and so must be kept outside the other form
+render_major_errors(member) %>
 
 <%= bootstrap_form_for([:rsvp, member]) do |f| %>
 
@@ -32,7 +35,6 @@
 
   <br />
 
-  <%= render_major_errors(member) %>
 
   <%= f.text_field :title, class: "input-lg" %>
   <%= f.text_field :first_name, class: "input-lg" %>

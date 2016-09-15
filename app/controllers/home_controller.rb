@@ -46,6 +46,7 @@ class HomeController < ApplicationController
     member = Member.find_by(email: params[:email])
     token = MemberToken.new(member: member)
     if token.save
+      token.add_notes( "Used in mailing a change of details token, requested by user" )
       MemberMailer.token_link(token).deliver_later
       redirect_to root_path, notice: "Email has been sent to #{ params[:email] }"
     else
@@ -66,6 +67,7 @@ class HomeController < ApplicationController
         @member = token_record.member
         @rsvp = token_record.rsvp
         @event = @rsvp ? @rsvp.event : nil
+        token_record.add_notes( "Used to validate member" )
       else
         redirect_to '/sign_up'
       end
