@@ -5,7 +5,7 @@ class HomeController < ApplicationController
     @events = Event.where("date >= :now", {now: Date.today})
   end
 
-  def about_us
+  def contact_us
   end
 
   def rsvp

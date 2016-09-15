@@ -3,8 +3,9 @@ Rails.application.routes.draw do
   devise_for :users, path_names: { sign_up: '' }
 
   root to: "home#index"
-  get '/about_us',
-    to: 'home#about_us'
+
+  get '/contact_us',
+    to: 'home#contact_us'
 
   get '/sign_up',
     to: 'home#sign_up',
