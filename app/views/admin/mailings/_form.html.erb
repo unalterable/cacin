@@ -1,4 +1,4 @@
-<%= form_for( [:admin, event_mail],
+<%= bootstrap_form_for( [:admin, event_mail],
               url: (event_mail.new_record? ? admin_mailings_path : admin_mailing_path(event_mail) )
             ) do |f| %>
   <% if event_mail.errors.any? %>
@@ -13,44 +13,17 @@
     </div>
   <% end %>
 
-  <div class='form_group'>
-    <%= f.label :event_id, 'Event' %>
     <%= f.select(:event_id,
-                  options_for_select(Event.all.map do |event|
-                    [ event.name, event.id ]
-                  end),
-                  {default: event_mail.event},
-                  {class: "form-control input-lg"}
-                )
+                  options_for_select(
+                    Event.all.map { |e| [ e.name, e.id ] } ),
+                    {default: event_mail.event},
+                    {class: "form-control input-lg"}
+                  )
     %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :name %>
-    <%= f.text_field :name, class: "form-control input-lg"  %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :subject %>
-    <%= f.text_field :subject, class: "form-control input-lg"  %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :includes_rsvp %>
-    <%= f.check_box :includes_rsvp, class: "form-control input-lg"  %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :html_template %>
-    <%= f.text_area :html_template, class: "form-control input-lg"  %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :plain_text_template %>
-    <%= f.text_area :plain_text_template, class: "form-control input-lg"  %>
-  </div>
-
-  <div class="actions">
+    <%= f.text_field :name %>
+    <%= f.text_field :subject%>
+    <%= f.check_box :includes_rsvp%>
+    <%= f.text_area :html_template, rows: 20 %>
+    <%= f.text_area :plain_text_template, rows: 20 %>
     <%= f.submit %>
-  </div>
 <% end %>
