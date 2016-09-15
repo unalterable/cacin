@@ -16,7 +16,7 @@
   </thead>
 
   <tbody>
-    <% @members.order(:created_at).each do |member| %>
+    <% @members.reorder(:created_at).each do |member| %>
       <tr>
         <td><%= member.id %> ( <%= member.email %> )</td>
         <td><%= member.priority %></td>
