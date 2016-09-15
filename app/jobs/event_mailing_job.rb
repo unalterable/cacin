@@ -31,7 +31,7 @@ class EventMailingJob < ApplicationJob
     end
 
     def get_rsvp_token(member)
-      MemberToken.create( member: member,
+      MemberToken.find_or_create_by( member: member,
                           rsvp: get_rsvp(member, @event_mail.event),
                           notes: token_notes)
     end
