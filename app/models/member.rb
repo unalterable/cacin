@@ -14,7 +14,7 @@ class Member < ApplicationRecord
   require 'csv'
 
   def self.import_csv(file)
-    CSV.foreach(file.path, headers: true).reverse_each do |row|
+    CSV.foreach(file.path, headers: true).each do |row|
       member_hash = row.to_hash
       member_hash["email"] = clean_email(member_hash["email"]) if member_hash["email"]
       member = Member.where(email: member_hash["email"])
