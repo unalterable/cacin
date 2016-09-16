@@ -9,8 +9,10 @@ class Admin::MembersController < ApplicationController
   end
 
   def import
+    before = Member.count
     Member.import_csv(params[:file])
-    redirect_to admin_members_path, notice: "Products imported."
+    after = Member.count
+    redirect_to admin_members_path, notice: "#{after-before} members added. Maybe more updated."
   end
 
   def export
