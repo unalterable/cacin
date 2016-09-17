@@ -51,7 +51,7 @@
 
 
 <div class="well text-danger">
-  <h3>Mass Delete</h3>
+  <h3>Mass Delete (will only work for members without details)</h3>
   <%= bootstrap_form_tag url: admin_members_mass_destroy_path, multipart: true do |f| %>
   <%= f.text_area :emails_for_deletion %>
   <%= f.submit "Delete emails", data: { confirm: 'Are you sure? This will delete all these users and their assocated records' }  %>
