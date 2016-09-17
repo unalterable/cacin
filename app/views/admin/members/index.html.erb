@@ -18,7 +18,7 @@
   <tbody>
     <% @members.reorder(:created_at).each do |member| %>
       <tr>
-        <td><%= member.id %> ( <%= member.email %> )</td>
+        <td><%= member.id %>: <%= member.email %></td>
         <td><%= member.priority %></td>
         <td><%= member.first_name %></td>
         <td><%= member.last_name %></td>
@@ -26,6 +26,7 @@
         <td><%= member.created_at.strftime("%H:%M - %d-%b-%y") %></td>
         <td><%= link_to 'Show', admin_member_path(member) %></td>
         <td><%= link_to 'Edit', edit_admin_member_path(member) %></td>
+        <td><%= link_to 'Destroy', admin_member_path(member), method: :delete, data: { confirm: 'Are you sure? This will delete all assocated records' } %></td>
       </tr>
     <% end %>
   </tbody>

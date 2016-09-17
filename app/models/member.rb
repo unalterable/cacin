@@ -2,6 +2,7 @@ class Member < ApplicationRecord
 
   has_many :rsvps
   has_many :member_tokens
+  has_many :event_mail_logs
 
   validates :email, uniqueness: true
 

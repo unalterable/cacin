@@ -65,11 +65,21 @@ class Admin::MembersController < ApplicationController
   # DELETE /members/1
   # DELETE /members/1.json
   def destroy
-    @member.destroy
-    respond_to do |format|
-      format.html { redirect_to admin_members_url, notice: 'Member was successfully destroyed.' }
-      format.json { head :no_content }
+    i = 0
+    @member.event_mail_logs.each do |record|
+      record.destroy
+      i += 1
     end
+    @member.member_tokens.each do |record|
+      record.destroy
+      i += 1
+    end
+    @member.rsvps.each do |record|
+      record.destroy
+      i += 1
+    end
+    @member.destroy;
+    redirect_to admin_members_url, notice: "Member and #{i} associated records (EventMailLogs MemberTokens Rsvps) were successfully destroyed."
   end
 
   private
