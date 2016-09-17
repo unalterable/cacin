@@ -36,6 +36,8 @@ Rails.application.routes.draw do
       to: 'members#export'
     post '/members/import',
       to: 'members#import'
+    post '/members/mass_destroy',
+      to: 'members#mass_destroy'
     get '/event_mail_logs',
       to: 'event_mail_logs#index'
   end

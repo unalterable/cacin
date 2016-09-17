@@ -1,6 +1,20 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Members</h1>
+
+
+<%= link_to 'New Member', new_admin_member_path %>
+
+<br />
+<br />
+<br />
+
+<div class="well">
+  <h3>Import/Export a CSV File</h3>
+  <%= link_to "Export", admin_members_export_path %>
+  <%= bootstrap_form_tag url: admin_members_import_path, multipart: true do |f| %>
+  <%= f.file_field :file %>
+  <%= f.submit "Import CSV" %>
+  <% end %>
+</div>
 
 <table class="table table-striped small">
   <thead>
@@ -34,13 +48,12 @@
 
 <br>
 
-<%= link_to 'New Member', new_admin_member_path %>
 
 
-<div class="well">
-  <h3>Import a CSV File</h3>
-  <%= bootstrap_form_tag url: admin_members_import_path, multipart: true do |f| %>
-  <%= f.file_field :file %>
-  <%= f.submit "Import CSV" %>
+<div class="well text-danger">
+  <h3>Mass Delete</h3>
+  <%= bootstrap_form_tag url: admin_members_mass_destroy_path, multipart: true do |f| %>
+  <%= f.text_area :emails_for_deletion %>
+  <%= f.submit "Delete emails", data: { confirm: 'Are you sure? This will delete all these users and their assocated records' }  %>
   <% end %>
 </div>

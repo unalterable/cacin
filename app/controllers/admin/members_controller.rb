@@ -62,24 +62,23 @@ class Admin::MembersController < ApplicationController
     end
   end
 
-  # DELETE /members/1
-  # DELETE /members/1.json
+  def mass_destroy
+    members_destroyed = 0
+    assocs_destroyed = 0
+    params[:emails_for_deletion].each_line do |line|
+      if member = Member.find_by_dirty_email_address(line)
+        assocs_destroyed += destroy_associations(member)
+        member.destroy
+        members_destroyed += 1
+      end
+    end
+    redirect_to admin_members_url, notice: "#{members_destroyed} Member(s) and #{assocs_destroyed} associated records (event_mail_logs, member_tokens, rsvps) were successfully destroyed."
+  end
+
   def destroy
-    i = 0
-    @member.event_mail_logs.each do |record|
-      record.destroy
-      i += 1
-    end
-    @member.member_tokens.each do |record|
-      record.destroy
-      i += 1
-    end
-    @member.rsvps.each do |record|
-      record.destroy
-      i += 1
-    end
+    i = destroy_associations(@member)
     @member.destroy;
-    redirect_to admin_members_url, notice: "Member and #{i} associated records (EventMailLogs MemberTokens Rsvps) were successfully destroyed."
+    redirect_to admin_members_url, notice: "Member and #{i} associated records (event_mail_logs, member_tokens, rsvps) were successfully destroyed."
   end
 
   private
@@ -90,5 +89,22 @@ class Admin::MembersController < ApplicationController
 
     def member_params
       params.require(:member).permit(:title, :first_name, :last_name, :job_title, :organisation, :email)
+    end
+
+    def destroy_associations(member)
+      i = 0
+      member.event_mail_logs.each do |record|
+        record.destroy
+        i += 1
+      end
+      member.member_tokens.each do |record|
+        record.destroy
+        i += 1
+      end
+      member.rsvps.each do |record|
+        record.destroy
+        i += 1
+      end
+      i
     end
 end

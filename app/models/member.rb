@@ -14,6 +14,10 @@ class Member < ApplicationRecord
 
   require 'csv'
 
+  def self.find_by_dirty_email_address(string)
+    Member.find_by(email: Member.clean_email(string))
+  end
+
   def self.import_csv(file)
     CSV.foreach(file.path, headers: true).each do |row|
       member_hash = row.to_hash
