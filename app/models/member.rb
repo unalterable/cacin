@@ -15,9 +15,9 @@ class Member < ApplicationRecord
   require 'csv'
 
   def good_contact?
-    first_name.length > 0 ||
-    last_name.length > 0 ||
-    organisation.length > 0
+    (first_name && first_name.length > 0) ||
+    (last_name && last_name.length > 0) ||
+    (organisation && organisation.length > 0)
   end
 
   def self.find_by_dirty_email_address(string)
