@@ -1,11 +1,15 @@
 class MoveTokenAndNotesToMember < ActiveRecord::Migration[5.0]
   def up
     add_column :members, :token, :string
-    add_column :members, :notes, :text
+    add_column :members, :notes, :text, null: false, default: ""
     Member.all.each do |member|
-      if member.member_tokens.first
-        member.update(token: member.member_tokens.first.token)
-        member.update(notes: member.member_tokens.first.notes)
+      if member.member_tokens.last
+        member.update(token: member.member_tokens.last.token)
+        member.update(notes: member.member_tokens.last.notes || "")
+        member.add_notes("Transferred in migration from MemberToken ##{member.member_tokens.last.id}")
+      else
+        member.update(token: Member.gen_unique_token)
+        member.add_notes("Created in migration. Member didn't have a MemberToken")
       end
     end
   end

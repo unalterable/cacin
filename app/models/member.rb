@@ -1,6 +1,7 @@
 class Member < ApplicationRecord
 
-  before_create { self.token = gen_token }
+  before_create { self.token = Member.gen_unique_token }
+  after_create { add_notes('Created')}
 
   has_many :rsvps
   has_many :member_tokens
@@ -17,7 +18,7 @@ class Member < ApplicationRecord
   # move into methods that use it?
   require 'csv'
 
-  def gen_token
+  def self.gen_unique_token
     require 'securerandom'
     begin
       token = SecureRandom.urlsafe_base64

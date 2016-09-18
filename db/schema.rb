@@ -79,11 +79,11 @@ ActiveRecord::Schema.define(version: 20160918015230) do
     t.string   "job_title"
     t.string   "organisation"
     t.string   "email"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
     t.string   "priority"
     t.string   "token"
-    t.text     "notes"
+    t.text     "notes",        default: "", null: false
   end
 
   create_table "rsvps", force: :cascade do |t|
