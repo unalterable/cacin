@@ -12,7 +12,7 @@
   </thead>
 
   <tbody>
-    <% rsvps_for_event.order(status: :asc, created_at: :desc).each_with_index do |rsvp, i| %>
+    <% rsvps_for_event.order(status: :asc, updated_at: :desc).each_with_index do |rsvp, i| %>
       <%theme = "danger" if rsvp.status == "not_attending"
         theme = "success" if rsvp.status == "attending" %>
       <tr class="<%= theme %>">
