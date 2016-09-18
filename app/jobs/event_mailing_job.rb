@@ -30,11 +30,6 @@ class EventMailingJob < ApplicationJob
       EventMailer.invitation(member, @event_mail)
     end
 
-    def get_rsvp(member, event)
-      Rsvp.find_or_create_by( member: member,
-                              event: event)
-    end
-
     def notify_admin(i, member)
       (@membersSinceNotify ||= []) << member
       if i+1 == @members.count
