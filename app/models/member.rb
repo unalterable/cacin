@@ -47,7 +47,9 @@ class Member < ApplicationRecord
   def self.import_csv(file)
     puts '=========================='
     CSV.foreach(file.path, headers: true).each do |row|
+      puts 'inside each'
       member_hash = row.to_hash
+      puts member_hash
       member_hash["email"] = clean_email(member_hash["email"]) if member_hash["email"]
       puts Member.find_by(email: member_hash["email"])
       Member.create!(member_hash) unless !!Member.find_by(email: member_hash["email"])
