@@ -1,10 +1,9 @@
 class EventMailer < ApplicationMailer
   after_action :log
 
-  def invitation(member, event_mail, member_token = nil)
+  def invitation(member, event_mail)
     @member = member
     @event_mail = event_mail
-    @member_token = member_token
     basic_email(  to: to,
                   subject: subject,
                   html: html,
@@ -34,15 +33,13 @@ class EventMailer < ApplicationMailer
     end
 
     def template_vars
-      # dup 3
-      rsvp_url = rsvp_url(token: @member_token.token) if @member_token
       { member: @member,
-        member_token: @member_token,
-        rsvp_url: rsvp_url }
+        rsvp_url: rsvp_url(token: @member.token) }
     end
 
     def log
-      EventMailLog.create(member: @member, event_mail: @event_mail, member_token: @member_token)
+      EventMailLog.create(member: @member, event_mail: @event_mail)
+      @member.add_notes("Sending EventMail ##{ @event_mail.id }: SENT")
     end
 
 end

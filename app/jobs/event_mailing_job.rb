@@ -23,27 +23,16 @@ class EventMailingJob < ApplicationJob
 
     def email_member(member)
       create_email(member).deliver_later
+      member.add_notes("Sending EventMail ##{ @event_mail.id }: QUEUED")
     end
 
     def create_email(member)
-      token = get_rsvp_token(member) if @event_mail.includes_rsvp
-      EventMailer.invitation(member, @event_mail, token)
-    end
-
-    def get_rsvp_token(member)
-      # must be removed and replaced with member.token
-      # the token sent with this email is no longer valid
-      MemberToken.find_or_create_by(member: member).add_notes( token_notes )
-
+      EventMailer.invitation(member, @event_mail)
     end
 
     def get_rsvp(member, event)
       Rsvp.find_or_create_by( member: member,
                               event: event)
-    end
-
-    def token_notes
-      "Used in the mailing of EventMail: '##{ @event_mail.id }: #{ @event_mail.name }'"
     end
 
     def notify_admin(i, member)

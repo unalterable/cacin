@@ -14,7 +14,7 @@ class EventMail < ApplicationRecord
   end
 
   def plain_text_sample
-      render_plain_text(sample_vars)
+    render_plain_text(sample_vars)
   end
 
   private
@@ -27,25 +27,7 @@ class EventMail < ApplicationRecord
 
     def template_vars(args)
       { location: event.location,
-        token: get_token(args),
-        rsvp_url: get_rsvp_url(args)}
-    end
-
-    #dup 1
-    def get_token(args)
-      if includes_rsvp && !!args[:member_token]
-        args[:member_token].token
-      else
-        nil
-      end
-    end
-
-    #dup 2
-    def get_rsvp_url(args)
-      if includes_rsvp && !!args[:rsvp_url]
-        args[:rsvp_url]
-      else
-        nil
-      end
+        token: args[:token],
+        rsvp_url: args[:rsvp_url]}
     end
 end
