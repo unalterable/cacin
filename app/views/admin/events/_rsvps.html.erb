@@ -22,8 +22,8 @@
           "<%= rsvp.member.email %>"
         </td>
         <td><%= rsvp.status.capitalize if rsvp.status %></td>
-        <td><%= rsvp.updated_at %></td>
-        <td><%= rsvp.created_at %></td>
+        <td><%= rsvp.updated_at.strftime("%H:%M - %d-%b-%y") %></td>
+        <td><%= rsvp.created_at.strftime("%H:%M - %d-%b-%y") %></td>
       </tr>
     <% end %>
   </tbody>
