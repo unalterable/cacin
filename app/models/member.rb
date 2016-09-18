@@ -48,12 +48,7 @@ class Member < ApplicationRecord
     CSV.foreach(file.path, headers: true).each do |row|
       member_hash = row.to_hash
       member_hash["email"] = clean_email(member_hash["email"]) if member_hash["email"]
-      member = Member.where(email: member_hash["email"])
-      if member.count > 0
-        member.first.update_attributes(member_hash)
-      else
-        Member.create!(member_hash)
-      end
+      Member.create!(member_hash) unless Member.find_by(email: member_hash["email"])
     end
   end
 

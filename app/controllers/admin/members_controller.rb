@@ -12,7 +12,7 @@ class Admin::MembersController < ApplicationController
     before = Member.count
     Member.import_csv(params[:file])
     after = Member.count
-    redirect_to admin_members_path, notice: "#{after-before} members added. Maybe more updated."
+    redirect_to admin_members_path, notice: "#{after-before} members added. Existing email addresses ignored"
   end
 
   def export
