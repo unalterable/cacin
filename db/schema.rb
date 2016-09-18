@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160918163847) do
+ActiveRecord::Schema.define(version: 20160918171048) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,17 +45,6 @@ ActiveRecord::Schema.define(version: 20160918163847) do
     t.text     "details"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "invitations", force: :cascade do |t|
-    t.integer  "event_id"
-    t.text     "html"
-    t.text     "plain_text"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string   "name"
-    t.text     "notes"
-    t.index ["event_id"], name: "index_invitations_on_event_id", using: :btree
   end
 
   create_table "members", force: :cascade do |t|
@@ -102,7 +91,6 @@ ActiveRecord::Schema.define(version: 20160918163847) do
   add_foreign_key "event_mail_logs", "event_mails"
   add_foreign_key "event_mail_logs", "members"
   add_foreign_key "event_mails", "events"
-  add_foreign_key "invitations", "events"
   add_foreign_key "rsvps", "events"
   add_foreign_key "rsvps", "members"
 end
