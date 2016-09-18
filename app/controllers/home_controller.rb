@@ -47,14 +47,12 @@ class HomeController < ApplicationController
   end
 
   def request_token_email
-    member = Member.find_by(email: params[:email])
-    token = MemberToken.new(member: member)
-    if token.save
-      token.add_notes( "Used in mailing a change of details token, requested by user" )
-      MemberMailer.token_link(token).deliver_later
+    if member = Member.find_by(email: params[:email])
+      MemberMailer.token_link(member.token).deliver_later
+      member.add_notes( "Used in mailing a change of details email, requested by user" )
       redirect_to root_path, notice: "Email has been sent to #{ params[:email] }"
     else
-      redirect_to root_path, notice: "There has been an error. The email did not send. Please contact the system administrator."
+      redirect_to root_path, notice: "There has been an error. The email did not send. Please contact CACIN: #{contact_us_link_tag}"
     end
   end
 
@@ -70,8 +68,7 @@ class HomeController < ApplicationController
         @member.add_notes( "Used to validate member" )
         @member.member_input = true
       else
-        admin_contact_link = "<a href='#{contact_us_path}'>HERE</a>"
-        redirect_to '/sign_up', notice: "Token Invalid. If this was not the page you were expecting please contact CACIN: #{admin_contact_link}"
+        redirect_to '/sign_up', notice: "Token Invalid. If this was not the page you were expecting please contact CACIN: #{contact_us_link_tag}"
       end
     end
 
@@ -85,6 +82,10 @@ class HomeController < ApplicationController
 
     def set_upcoming_events
       @events = Event.where("date >= :now", {now: Date.today})
+    end
+
+    def contact_us_link_tag
+      "<a href='#{contact_us_path}'>HERE</a>"
     end
 
 end

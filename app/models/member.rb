@@ -4,7 +4,6 @@ class Member < ApplicationRecord
   after_create { add_notes('Created')}
 
   has_many :rsvps
-  has_many :member_tokens
   has_many :event_mail_logs
 
   validates :email, uniqueness: true

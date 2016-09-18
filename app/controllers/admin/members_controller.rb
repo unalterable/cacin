@@ -74,13 +74,13 @@ class Admin::MembersController < ApplicationController
         end
       end
     end
-    redirect_to admin_members_url, notice: "#{members_destroyed} Member(s) and #{assocs_destroyed} associated records (event_mail_logs, member_tokens, rsvps) were successfully destroyed."
+    redirect_to admin_members_url, notice: "#{members_destroyed} Member(s) and #{assocs_destroyed} associated records (event_mail_logs & rsvps) were successfully destroyed."
   end
 
   def destroy
     i = destroy_associations(@member)
     @member.destroy;
-    redirect_to admin_members_url, notice: "Member and #{i} associated records (event_mail_logs, member_tokens, rsvps) were successfully destroyed."
+    redirect_to admin_members_url, notice: "Member and #{i} associated records (event_mail_logs & rsvps) were successfully destroyed."
   end
 
   private
@@ -96,10 +96,6 @@ class Admin::MembersController < ApplicationController
     def destroy_associations(member)
       i = 0
       member.event_mail_logs.each do |record|
-        record.destroy
-        i += 1
-      end
-      member.member_tokens.each do |record|
         record.destroy
         i += 1
       end
