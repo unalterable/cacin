@@ -31,6 +31,8 @@ class EventMailingJob < ApplicationJob
     end
 
     def get_rsvp_token(member)
+      # must be removed and replaced with member.token
+      # the token sent with this email is no longer valid
       MemberToken.find_or_create_by(member: member).add_notes( token_notes )
 
     end
