@@ -8,19 +8,17 @@ Rails.application.routes.draw do
     to: 'home#contact_us'
 
   get '/sign_up',
-    to: 'home#sign_up',
-    as: 'sign_up'
+    to: 'home#sign_up', as: 'sign_up'
+  post '/sign_up_attempt',
+    to: 'home#new_member', as: 'new_member'
 
   post '/request_token_email',
-    to: 'home#request_token_email',
-    as: 'request_token_email'
+    to: 'home#request_token_email', as: 'request_token_email'
 
   get '/rsvp',
     to: 'home#rsvp'
-  post '/rsvp_update',
-    to: 'home#new_member', as: 'rsvp_members'
   patch '/rsvp_update.:id',
-    to: 'home#rsvp_update', as: 'rsvp_member'
+    to: 'home#rsvp_update', as: 'update_member'
 
   post '/email_admin',
     to: 'home#email_admin', as: 'email_admin'

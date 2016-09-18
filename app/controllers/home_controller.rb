@@ -1,14 +1,12 @@
 class HomeController < ApplicationController
   before_action :validate_token, only: [:rsvp, :rsvp_update]
 
+  before_action :set_upcoming_events, only: [:index, :rsvp, :rsvp_update]
+
   def index
-    @events = Event.where("date >= :now", {now: Date.today})
   end
 
   def contact_us
-  end
-
-  def rsvp
   end
 
   def sign_up
@@ -21,11 +19,19 @@ class HomeController < ApplicationController
     redirect_to about_us_path, notice: "Your email was successfully sent to the CACIN Director."
   end
 
+  def rsvp
+    @member = @token.member
+    @token.add_notes( "Used to validate member" )
+
+  end
+
   def rsvp_update
-    @member.member_input = true
-    @rsvp.status = params[:rsvp]
     if @member.update(member_params)
-      @rsvp.save
+      @rsvps = params[:rsvps].map do |rsvp|
+        new_rsvp = Rsvp.find_or_create_by(member: @member, event_id: rsvp[:event_id])
+        new_rsvp.update(status: rsvp[:status])
+        new_rsvp
+      end
       redirect_to rsvp_path(token: params[:token]), notice: 'RSVP was saved successfully.'
     else
       render :rsvp
@@ -34,6 +40,7 @@ class HomeController < ApplicationController
 
   def new_member
     @member = Member.new(member_params)
+    @member.member_input = true
     if @member.save
       sendInvitationsIfAnyAreLive
       redirect_to root_path, notice: "#{@member.first_name} #{@member.last_name}, you have successfully signed up."
@@ -63,11 +70,10 @@ class HomeController < ApplicationController
 
     def validate_token
       if params[:token] && token_record = MemberToken.find_by(token: params[:token])
-        @token = token_record.token
-        @member = token_record.member
-        @rsvp = token_record.rsvp
-        @event = @rsvp ? @rsvp.event : nil
-        token_record.add_notes( "Used to validate member" )
+        @token = token_record
+        @member = @token.member
+        @token.add_notes( "Used to validate member" )
+        @member.member_input = true
       else
         redirect_to '/sign_up'
       end
@@ -79,6 +85,10 @@ class HomeController < ApplicationController
           EventMailingJob.perform_later( event_mail, [@member] ) if event_mail.sent
         end
       end
+    end
+
+    def set_upcoming_events
+      @events = Event.where("date >= :now", {now: Date.today})
     end
 
 end

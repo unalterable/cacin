@@ -1,4 +1,20 @@
+<% if @member.errors.any? %>
+<div class='alert alert-danger'> There were some errors in your submission. Please see below:</div>
+<% end %>
+
+<%=
+# This may contain forms and so must be kept outside the other form
+render_major_errors(@member) %>
+
 
 <h1>Sign Up</h1>
 
-<%= render 'member_form', member: @member, token: nil, event: nil %>
+
+
+<%= bootstrap_form_for(@member, url: new_member_path) do |f| %>
+
+  <%= render 'member_form_fields', form_builder: f, member: @member %>
+
+  <%= f.submit "Sign Up" %>
+
+<% end %>

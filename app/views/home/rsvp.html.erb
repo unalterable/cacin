@@ -1,4 +1,53 @@
-<h1>RSVP for: <%= @member.email %></h1>
+<% if @member.errors.any? %>
+<div class='alert alert-danger'> There were some errors in your submission. Please see below:</div>
+<% end %>
+
+<%=
+# This may contain forms and so must be kept outside the other form
+render_major_errors(@member) %>
+
+
+<h1>Welcome "<%= @member.email %>"</h1>
+
 (If this is not you, please visit <%= link_to "here", sign_up_path %> to sign up.)
+
 <br /><br />
-<%= render 'member_form', member: @member, token: @token, event: @event, rsvp: @rsvp %>
+
+
+
+<%= bootstrap_form_for(@member, url: update_member_path(@member)) do |f| %>
+
+  <%= hidden_field_tag(:token, @token.token) %>
+
+  <% @events.each do |event|
+      pre_selected_option = 'attending'
+        theme = "has-error"
+      if existing_rsvp = @member.rsvps.find_by(event: event)
+        theme = ""
+        pre_selected_option = existing_rsvp.status
+      end
+  %>
+    <div class='jumbotron <%= theme %>'>
+      <center>
+        <h2><%= event.name %></h2>
+        <br />
+        <b><%= event.date.to_formatted_s(:long_ordinal)    %></b>
+        <br />
+        <i><%= event.location %></i>
+        <br />
+        <br />
+      </center>
+      <%= hidden_field_tag("rsvps[][event_id]", event.id) %>
+      <%= select_tag("rsvps[][status]", options_for_select([
+      ['Attending', 'attending'],
+      ['Not Attending', 'not_attending']
+      ], pre_selected_option),
+      class: "form-control input-lg" ) %>
+    </div>
+  <% end %>
+
+  <%= render 'member_form_fields', form_builder: f, member: @member %>
+
+  <%= f.submit "Submit" %>
+
+<% end %>
