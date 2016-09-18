@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160918015230) do
+ActiveRecord::Schema.define(version: 20160918163009) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,12 +18,10 @@ ActiveRecord::Schema.define(version: 20160918015230) do
   create_table "event_mail_logs", force: :cascade do |t|
     t.integer  "event_mail_id"
     t.integer  "member_id"
-    t.integer  "member_token_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.index ["event_mail_id"], name: "index_event_mail_logs_on_event_mail_id", using: :btree
     t.index ["member_id"], name: "index_event_mail_logs_on_member_id", using: :btree
-    t.index ["member_token_id"], name: "index_event_mail_logs_on_member_token_id", using: :btree
   end
 
   create_table "event_mails", force: :cascade do |t|
@@ -114,7 +112,6 @@ ActiveRecord::Schema.define(version: 20160918015230) do
   end
 
   add_foreign_key "event_mail_logs", "event_mails"
-  add_foreign_key "event_mail_logs", "member_tokens"
   add_foreign_key "event_mail_logs", "members"
   add_foreign_key "event_mails", "events"
   add_foreign_key "invitations", "events"

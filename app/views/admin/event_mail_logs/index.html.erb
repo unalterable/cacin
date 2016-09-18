@@ -26,7 +26,6 @@
           id = event_mail_log.member_id
           link_to "Member ##{id}", admin_member_path(id: id)
          %></td>
-        <td>#<%= event_mail_log.member_token_id %></td>
         <td><%= event_mail_log.created_at.strftime("%H:%M - %d-%b-%y")  %></td>
         <td><%= event_mail_log.updated_at.strftime("%H:%M - %d-%b-%y")  %></td>
       </tr>
