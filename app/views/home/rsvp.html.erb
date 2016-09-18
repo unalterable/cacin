@@ -17,7 +17,7 @@ render_major_errors(@member) %>
 
 <%= bootstrap_form_for(@member, url: update_member_path(@member)) do |f| %>
 
-  <%= hidden_field_tag(:token, @token.token) %>
+  <%= hidden_field_tag(:token, @member.token) %>
 
   <% @events.each do |event|
       pre_selected_option = 'attending'

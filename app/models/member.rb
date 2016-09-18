@@ -1,5 +1,7 @@
 class Member < ApplicationRecord
 
+  before_create { self.token = gen_token }
+
   has_many :rsvps
   has_many :member_tokens
   has_many :event_mail_logs
@@ -12,12 +14,30 @@ class Member < ApplicationRecord
 
   attr_accessor :member_input
 
+  # move into methods that use it?
   require 'csv'
+
+  def gen_token
+    require 'securerandom'
+    begin
+      token = SecureRandom.urlsafe_base64
+    end while Member.find_by(token: token)
+    token
+  end
 
   def good_contact?
     (first_name && first_name.length > 0) ||
     (last_name && last_name.length > 0) ||
     (organisation && organisation.length > 0)
+  end
+
+  def add_notes(new_notes)
+    old_notes = notes || ""
+    datetime = DateTime.now.strftime("%H:%M  %d-%b-%y")
+    new_notes = "#{ datetime }: #{ new_notes }"
+    new_notes = " \n" + new_notes unless old_notes == ""
+    update(notes: old_notes + new_notes)
+    self
   end
 
   def self.find_by_dirty_email_address(string)

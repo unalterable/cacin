@@ -20,9 +20,6 @@ class HomeController < ApplicationController
   end
 
   def rsvp
-    @member = @token.member
-    @token.add_notes( "Used to validate member" )
-
   end
 
   def rsvp_update
@@ -69,13 +66,12 @@ class HomeController < ApplicationController
     end
 
     def validate_token
-      if params[:token] && token_record = MemberToken.find_by(token: params[:token])
-        @token = token_record
-        @member = @token.member
-        @token.add_notes( "Used to validate member" )
+      if params[:token] && @member = Member.find_by(token: params[:token])
+        @member.add_notes( "Used to validate member" )
         @member.member_input = true
       else
-        redirect_to '/sign_up'
+        admin_contact_link = "<a href='#{contact_us_path}'>HERE</a>"
+        redirect_to '/sign_up', notice: "Token Invalid. If this was not the page you were expecting please contact CACIN: #{admin_contact_link}"
       end
     end
 
