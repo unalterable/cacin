@@ -13,7 +13,7 @@
   </thead>
 
   <tbody>
-    <% @event_mail_logs.sort_by(&:date).reverse.each do |log| %>
+    <% @logs.sort_by(&:date).reverse.each do |log| %>
       <tr>
         <td><%= log.date.strftime("%d-%b-%y - %H:%M") %></td>
         <td><%=
