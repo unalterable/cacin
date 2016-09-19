@@ -15,8 +15,9 @@
     </thead>
 
     <tbody>
+      done_members = event_mail.logs.map{|log| member_id}
       <% members.each do |member|
-          logs = event_mail.logs.select{|log| log.member_id == member.id} %>
+          done = done_members.include?(member.id) %>
         <tr <%= 'class=info' if logs.count > 0 %>>
           <td><%= check_box_tag 'members[]', member.id, logs.count == 0 %></td>
           <td><%= member.priority %></td>
