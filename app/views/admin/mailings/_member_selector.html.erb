@@ -10,20 +10,22 @@
         <th class="col-md-4">Name</th>
         <th class="col-md-2">Job title</th>
         <th class="col-md-2">Company</th>
+        <thTimes Sent</th>
       </tr>
     </thead>
 
     <tbody>
      <% done_members = event_mail.logs.map{|log| log.member_id}
         members.each do |member|
-          done = done_members.include?(member.id) %>
-          <tr <%= 'class=info' if done %>>
-            <td><%= check_box_tag 'members[]', member.id, !done %></td>
+          times_sent = done_members.count(member.id) %>
+          <tr <%= 'class=info' if times_sent > 0 %>>
+            <td><%= check_box_tag 'members[]', member.id, times_sent==0 %></td>
             <td><%= member.priority %></td>
             <td class="col-md-4"><%= member.id %> (<%= member.email %>)</td>
             <td class="col-md-4"><%= "#{member.first_name} #{member.last_name}" %></td>
             <td class="col-md-2"><%= member.job_title %></td>
             <td class="col-md-2"><%= member.organisation %></td>
+            <td><%= times_sent %></td>
           </tr>
       <% end %>
     </tbody>
