@@ -14,7 +14,7 @@ class MoveEventMailLogsIntoEventMail < ActiveRecord::Migration[5.0]
       YAML.load(event_mail.yaml_logs).each do |log|
         EventMailLog.find_or_create_by( member_id: log[:member_id],
                                         event_mail: event_mail
-                                      ).update(created_at: Date.parse(log[:date]))
+                                      )
       end
     end
     remove_column :event_mails, :yaml_logs
