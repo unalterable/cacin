@@ -5,28 +5,26 @@
 <table class='table table-striped table-condensed small'>
   <thead>
     <tr>
-      <th>ID</th>
+      <th>Date</th>
       <th>Event Mail</th>
       <th>Member</th>
-      <th>Created</th>
-      <th>Updated</th>
+      <th>Email Used</th>
     </tr>
   </thead>
 
   <tbody>
-    <% @event_mail_logs.reorder("created_at DESC").each do |event_mail_log| %>
+    <% @event_mail_logs.sort_by(&:date).reverse.each do |log| %>
       <tr>
-        <td><%= event_mail_log.id %></td>
+        <td><%= log.date.strftime("%d-%b-%y - %H:%M") %></td>
         <td><%=
-          id = event_mail_log.event_mail_id
+          id = log.event_mail_id
           link_to "Event Mail ##{id}", admin_mailing_path(id: id)
         %></td>
         <td><%=
-          id = event_mail_log.member_id
+          id = log.member_id
           link_to "Member ##{id}", admin_member_path(id: id)
          %></td>
-        <td><%= event_mail_log.created_at.strftime("%H:%M - %d-%b-%y")  %></td>
-        <td><%= event_mail_log.updated_at.strftime("%H:%M - %d-%b-%y")  %></td>
+        <td><%= log.email %></td>
       </tr>
     <% end %>
   </tbody>

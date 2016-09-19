@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160918172514) do
+ActiveRecord::Schema.define(version: 20160919134742) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 20160918172514) do
     t.string   "subject"
     t.boolean  "sent"
     t.boolean  "includes_rsvp"
+    t.text     "yaml_logs"
     t.index ["event_id"], name: "index_event_mails_on_event_id", using: :btree
   end
 

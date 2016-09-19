@@ -6,30 +6,25 @@
       <tr>
         <th>Select</th>
         <th>Priority</th>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Job title</th>
-        <th>Company</th>
-        <th>Email</th>
+        <th class="col-md-4">ID (email)</th>
+        <th class="col-md-4">Name</th>
+        <th class="col-md-2">Job title</th>
+        <th class="col-md-2">Company</th>
+        <th>Sent?</th>
       </tr>
     </thead>
 
     <tbody>
-      <% members.each do |member| %>
-        <%
-          if EventMailLog.find_by(event_mail: event_mail, member: member)
-            theme = "info"
-          end
-        %><tr class="<%= theme %>">
-          <td><%=
-              check_box_tag 'members[]', member.id, !theme
-          %></td>
+      <% members.each do |member|
+          logs = event_mail.logs.select{|log| log.member_id == member.id} %>
+        <tr <%= 'class=info' if logs.count > 0 %>>
+          <td><%= check_box_tag 'members[]', member.id, logs.count == 0 %></td>
           <td><%= member.priority %></td>
-          <td><%= member.id %></td>
-          <td><%= "#{member.first_name} #{member.last_name}" %></td>
-          <td><%= member.job_title %></td>
-          <td><%= member.organisation %></td>
-          <td><%= member.email %></td>
+          <td class="col-md-4"><%= member.id %> (<%= member.email %>)</td>
+          <td class="col-md-4"><%= "#{member.first_name} #{member.last_name}" %></td>
+          <td class="col-md-2"><%= member.job_title %></td>
+          <td class="col-md-2"><%= member.organisation %></td>
+          <td><%= logs.count %></td>
         </tr>
       <% end %>
     </tbody>

@@ -38,8 +38,8 @@ class EventMailer < ApplicationMailer
     end
 
     def log
-      EventMailLog.create(member: @member, event_mail: @event_mail)
       @member.add_notes("Sending EventMail ##{ @event_mail.id }: SENT")
+      @event_mail.add_logs([@member])
     end
 
 end
