@@ -39,6 +39,10 @@ class Member < ApplicationRecord
     self
   end
 
+  def pretty_name
+    "#{ title + ' ' unless title == ''}#{ first_name + ' ' unless first_name == ''}#{ last_name + ' ' unless last_name == ''}"
+  end
+
   def self.find_by_dirty_email_address(string)
     Member.find_by(email: Member.clean_email(string))
   end

@@ -1,0 +1,21 @@
+  <h3 class='text-center'>RSVPs for this event: <%= rsvps_for_event.count %></h3>
+
+  <table class='table table-striped table-condensed small text-center'>
+    <thead>
+      <tr>
+        <th class='text-center'>Name</th>
+        <th class='text-center'>Job Title</th>
+        <th class='text-center'>Organisation</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% rsvps_for_event.map(&:member).sort_by(&:organisation).each do |member| %>
+        <tr>
+          <td><%= member.pretty_name %></td>
+          <td><%= member.job_title %></td>
+          <td><%= member.organisation %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>

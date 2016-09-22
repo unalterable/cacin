@@ -1,0 +1,7 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Welcome <%= @member.pretty_name %></h1>
+
+<%= render "shared/event", event: @event %>
+
+<%= render "rsvps", rsvps_for_event: @rsvps_for_event %>

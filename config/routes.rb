@@ -23,6 +23,9 @@ Rails.application.routes.draw do
   post '/email_admin',
     to: 'home#email_admin', as: 'email_admin'
 
+  get '/event_status/:id',
+    to: 'home#event_status', as: 'event_status'
+
   namespace :admin do
     root to: "events#index", as: 'root'
     resources :events

@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  before_action :validate_token, only: [:rsvp, :rsvp_update]
+  before_action :validate_token, only: [:rsvp, :rsvp_update, :event_status]
 
   before_action :set_upcoming_events, only: [:index, :rsvp, :rsvp_update]
 
@@ -56,6 +56,11 @@ class HomeController < ApplicationController
     end
   end
 
+  def event_status
+    @event = Event.find(params[:id])
+    @rsvps_for_event = Rsvp.where(event: @event, status: 'attending')
+  end
+
 
   private
 
@@ -65,7 +70,7 @@ class HomeController < ApplicationController
 
     def validate_token
       if params[:token] && @member = Member.find_by(token: params[:token])
-        @member.add_notes( "Used to validate member" )
+        @member.add_notes( "Used to validate member: for #{controller_name}##{action_name}" )
         @member.member_input = true
       else
         redirect_to '/sign_up', notice: "Token Invalid. If this was not the page you were expecting please contact CACIN: #{contact_us_link_tag}"
