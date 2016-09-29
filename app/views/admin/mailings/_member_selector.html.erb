@@ -7,9 +7,10 @@
         <th>Select</th>
         <th>Priority</th>
         <th class="col-md-4">ID (email)</th>
-        <th class="col-md-4">Name</th>
+        <th class="col-md-3">Name</th>
         <th class="col-md-2">Job title</th>
         <th class="col-md-2">Company</th>
+        <th class="col-md-1">RSVP for Event</th>
         <th>Times Sent</th>
       </tr>
     </thead>
@@ -17,14 +18,18 @@
     <tbody>
      <% done_members = event_mail.logs.map{|log| log.member_id}
         members.each do |member|
-          times_sent = done_members.count(member.id) %>
-          <tr <%= 'class=info' if times_sent > 0 %>>
+          rsvp = member.rsvps.find_by(event: event_mail.event)
+          style = "success" if rsvp.status == "attending"
+          style = "danger" if done_members.count(member.id) < 1
+          %>
+          <tr class='<%= style %>'>
             <td><%= check_box_tag 'members[]', member.id, times_sent==0 %></td>
             <td><%= member.priority %></td>
             <td class="col-md-4"><%= member.id %> (<%= member.email %>)</td>
-            <td class="col-md-4"><%= "#{member.first_name} #{member.last_name}" %></td>
+            <td class="col-md-3"><%= "#{member.first_name} #{member.last_name}" %></td>
             <td class="col-md-2"><%= member.job_title %></td>
             <td class="col-md-2"><%= member.organisation %></td>
+            <td class="col-md-1"><%= (rsvp.status || "").capitalize %></td>
             <td><%= times_sent %></td>
           </tr>
       <% end %>
