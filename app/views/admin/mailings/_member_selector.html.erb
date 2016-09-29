@@ -27,7 +27,7 @@ rsvps = event_mail.event.rsvps.to_a
     </thead>
 
     <tbody>
-     <% members.each do |member|
+     <% members.order(updated_at: :desc).each do |member|
           rsvp = rsvps.find{|rsvp| rsvp.member_id == member.id}
           times_sent = done_members.count(member.id)
           style = "danger unsent" if times_sent < 1
