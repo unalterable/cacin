@@ -19,8 +19,9 @@
      <% done_members = event_mail.logs.map{|log| log.member_id}
         members.each do |member|
           rsvp = member.rsvps.find_by(event: event_mail.event)
+          times_sent = done_members.count(member.id)
           style = "success" if rsvp && rsvp.status == "attending"
-          style = "danger" if done_members.count(member.id) < 1
+          style = "danger" if times_sent < 1
           %>
           <tr class='<%= style %>'>
             <td><%= check_box_tag 'members[]', member.id, times_sent==0 %></td>
