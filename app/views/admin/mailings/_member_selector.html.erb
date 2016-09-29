@@ -1,6 +1,6 @@
 <%
 done_members = event_mail.logs.map{|log| log.member_id}
-rsvps = event_mail.event.rsvps
+rsvps = event_mail.event.rsvps.to_as
 %>
 
 <h3>Send to:</h3>
@@ -28,7 +28,7 @@ rsvps = event_mail.event.rsvps
 
     <tbody>
      <% members.each do |member|
-          rsvp = rsvps.find_by(member: member)
+          rsvp = rsvps.find{|rsvp| rsvp.member_id == member.id}
           times_sent = done_members.count(member.id)
           style = "danger unsent" if times_sent < 1
           style = "success attending" if rsvp && rsvp.status == "attending"
