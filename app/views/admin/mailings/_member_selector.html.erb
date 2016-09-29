@@ -1,5 +1,13 @@
+<% done_members = event_mail.logs.map{|log| log.member_id} %>
+
 <h3>Send to:</h3>
-<input type="checkbox" id="selectAll" value="selectAll"> Select / Deselect All<br>
+<p>Sent to <%= done_members.count %> of <%= members.count %></p>
+<p><%= eventmail.event.rsvps.count %> members have rsvp'd</p>
+<table><tr>
+<td><input type="checkbox" id="selectAll" value="selectAll"> Select / Deselect All</td>
+<td><input type="checkbox" id="selectAttending" value="selectAttending"> Select / Deselect Attending</td>
+</tr></table>
+
 <div class="pre-scrollable">
   <table class='table table-striped table-condensed small'>
     <thead>
@@ -16,12 +24,11 @@
     </thead>
 
     <tbody>
-     <% done_members = event_mail.logs.map{|log| log.member_id}
-        members.each do |member|
+     <% members.each do |member|
           rsvp = member.rsvps.find_by(event: event_mail.event)
           times_sent = done_members.count(member.id)
-          style = "success" if rsvp && rsvp.status == "attending"
-          style = "danger" if times_sent < 1
+          style = "success attending" if rsvp && rsvp.status == "attending"
+          style = "danger unsent" if times_sent < 1
           %>
           <tr class='<%= style %>'>
             <td><%= check_box_tag 'members[]', member.id, times_sent==0 %></td>
@@ -39,7 +46,6 @@
 </div>
 <script>
 $('#selectAll').click(function() {
-  console.log('clicked')
   if (this.checked) {
     $(':checkbox').each(function() {
       this.checked = true;
@@ -47,6 +53,17 @@ $('#selectAll').click(function() {
   } else {
     $(':checkbox').each(function() {
       this.checked = false;
+    });
+  }
+});
+$('#selectAttending').click(function() {
+  if (this.checked) {
+    $('.attending').each(function(){
+      $(this).find(":checkbox")[0].checked = true;
+    });
+  } else {
+    $('.attending').each(function() {
+      $(this).find(":checkbox")[0].checked = false;
     });
   }
 });
