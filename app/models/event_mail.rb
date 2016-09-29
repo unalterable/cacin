@@ -21,7 +21,7 @@ class EventMail < ApplicationRecord
   Log = Struct.new(:date, :member_id, :email, :event_mail_id)
 
   def logs
-    (YAML.load(yaml_logs)).map{|log| Log.new(log[:date], log[:member_id], log[:email], id)}
+    (YAML.load(yaml_logs || "--- []\n")).map{|log| Log.new(log[:date], log[:member_id], log[:email], id)}
   end
 
   def add_logs(members)
