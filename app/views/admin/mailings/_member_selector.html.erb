@@ -19,7 +19,7 @@
      <% done_members = event_mail.logs.map{|log| log.member_id}
         members.each do |member|
           rsvp = member.rsvps.find_by(event: event_mail.event)
-          style = "success" if rsvp.status == "attending"
+          style = "success" if rsvp && rsvp.status == "attending"
           style = "danger" if done_members.count(member.id) < 1
           %>
           <tr class='<%= style %>'>
@@ -29,7 +29,7 @@
             <td class="col-md-3"><%= "#{member.first_name} #{member.last_name}" %></td>
             <td class="col-md-2"><%= member.job_title %></td>
             <td class="col-md-2"><%= member.organisation %></td>
-            <td class="col-md-1"><%= (rsvp.status || "").capitalize %></td>
+            <td class="col-md-1"><%= (rsvp.status || "").capitalize if rsvp %></td>
             <td><%= times_sent %></td>
           </tr>
       <% end %>
