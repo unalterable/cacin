@@ -39,7 +39,7 @@ class HomeController < ApplicationController
     @member = Member.new(member_params)
     @member.member_input = true
     if @member.save
-      sendInvitationsIfAnyAreLive
+      # sendInvitationsIfAnyAreLive
       redirect_to root_path, notice: "#{@member.first_name} #{@member.last_name}, you have successfully signed up."
     else
       render :sign_up
@@ -77,13 +77,13 @@ class HomeController < ApplicationController
       end
     end
 
-    def sendInvitationsIfAnyAreLive
-      Event.where("date >= :now", {now: Date.today}).each do |event|
-        event.event_mails.each do |event_mail|
-          EventMailingJob.perform_later( event_mail, [@member] ) if event_mail.sent
-        end
-      end
-    end
+    # def sendInvitationsIfAnyAreLive
+    #   Event.where("date >= :now", {now: Date.today}).each do |event|
+    #     event.event_mails.each do |event_mail|
+    #       EventMailingJob.perform_later( event_mail, [@member] ) if event_mail.sent
+    #     end
+    #   end
+    # end
 
     def set_upcoming_events
       @events = Event.where("date >= :now", {now: Date.today})
