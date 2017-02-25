@@ -5,7 +5,7 @@ class Admin::MembersController < ApplicationController
   # GET /members
   # GET /members.json
   def index
-    @members = Member.order(id: :desc)
+    @members = Member.order(id: :asc)
   end
 
   def import
