@@ -13,14 +13,10 @@
     </div>
   <% end %>
 
-    <%= f.select(:event_id,
-                  options_for_select(
-                    Event.all.map { |e| [ e.name, e.id ] } , event_mail.event.name ),
-                    {class: "form-control input-lg"}
-                  )
-        p "--------------------------"
-        p event_mail.event
-    %>
+    <%= f.select( :event_id,
+                  options_for_select( Event.all.map { |e| [ e.name, e.id ] },
+                                      event_mail.event.name ),
+                  {class: "form-control input-lg"} ) %>
     <%= f.text_field :name %>
     <%= f.text_field :subject%>
     <%= f.check_box :includes_rsvp%>
