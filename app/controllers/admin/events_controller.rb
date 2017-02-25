@@ -4,7 +4,7 @@ class Admin::EventsController < ApplicationController
 
   # GET /admin/events
   def index
-    @events = Event.all
+    @events = Event.order(created_at: :desc)
   end
 
   # GET /admin/events/1
