@@ -15,8 +15,7 @@
 
     <%= f.select(:event_id,
                   options_for_select(
-                    Event.all.map { |e| [ e.name, e.id ] } ),
-                    {default: event_mail.event},
+                    Event.all.map { |e| [ e.name, e.id ] } , event_mail.event ),
                     {class: "form-control input-lg"}
                   )
     %>
