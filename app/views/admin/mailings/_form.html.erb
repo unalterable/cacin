@@ -15,7 +15,7 @@
 
     <%= f.select( :event_id,
                   options_for_select( Event.all.map { |e| [ e.name, e.id ] },
-                                      event_mail.event.name ),
+                                      event_mail.event.id ), ,
                   {class: "form-control input-lg"} ) %>
     <%= f.text_field :name %>
     <%= f.text_field :subject%>
