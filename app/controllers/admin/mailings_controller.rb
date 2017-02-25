@@ -4,7 +4,7 @@ class Admin::MailingsController < ApplicationController
   # GET /admin/mailings
   # GET /admin/mailings.json
   def index
-    @event_mails = EventMail.all
+    @event_mails = EventMail.order(:id)
   end
 
   # GET /admin/mailings/1
