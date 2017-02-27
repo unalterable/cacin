@@ -15,7 +15,7 @@
   </thead>
 
   <tbody>
-    <% @events.each do |event| %>
+    <% @events.reorder(created_at: :desc).each do |event| %>
       <tr>
         <td><%= event.name %></td>
         <td><%= event.date %></td>
