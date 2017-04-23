@@ -33,7 +33,7 @@ class EventMailer < ApplicationMailer
     end
 
     def template_vars
-      p "======================================================"
+      p "============ how does rsvp_url work from the routes??? -- oliver diamond"
       p rsvp_url(token: @member.token)
       { member: @member,
         rsvp_url: rsvp_url(token: @member.token) }
