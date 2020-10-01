@@ -1,4 +1,4 @@
-# To Do
+# To Do(things needs to be done)
 - change invitations to event_mails <b>-done</b>
   - rails g model event_mails event:references name:string subject:string <b>-done</b>
   - test
